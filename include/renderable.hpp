@@ -8,15 +8,34 @@ class Renderable {
 public:
 	GLuint vao;
 	GLuint buffer;
-	GLuint program;
 	GLuint colorBuffer;
+	GLuint program;
 
-	Renderable () {}
-	Renderable (GLuint _program) {program = _program;}
 	~Renderable () {}
 
 	virtual void initBuffers () = 0;
 	virtual void render () const = 0;
+
+	void setVao (const GLuint vao) {
+		this->vao = vao;
+	}
+	GLuint getVao () const {
+		return vao;
+	}
+
+	void setBuffer (const GLuint buffer) {
+		this->buffer = buffer;
+	}
+	GLuint getBuffer () const {
+		return buffer;
+	}
+
+	void setColorBuffer (const GLuint colorBuffer) {
+		this->colorBuffer = colorBuffer;
+	}
+	GLuint getColorBuffer () const {
+		return colorBuffer;
+	}
 
 	void setProgram (const GLuint program) {
 		this->program = program;
@@ -25,3 +44,4 @@ public:
 		return program;
 	}
 };
+#endif

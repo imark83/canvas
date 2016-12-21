@@ -13,6 +13,14 @@ public:
 		x = op.x; y = op.y;
 		return *this;
 	}
+
+	Vector2f operator+ (const Vector2f &op) const {
+		return Vector2f (this->x+op.x, this->y+op.y);
+	}
+
+	Vector2f & operator+= (const Vector2f &op) {
+		this->x+=op.x; this->y+=op.y; return *this;
+	}
 };
 typedef Vector2f Point2f;
 

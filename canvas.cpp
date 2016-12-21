@@ -16,7 +16,6 @@ void renderFunction () {
 
 	tr.render ();
 	glFlush ();
-
 }
 
 void init () {

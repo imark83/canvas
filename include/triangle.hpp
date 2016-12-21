@@ -13,6 +13,7 @@ public:
 		p[1].x = 0.86603; p[1].y = -0.5;
 		p[2].x = -0.86603; p[2].y = -0.5;
 	}
+	
 	void initBuffers ();
 	void render () const;
 };

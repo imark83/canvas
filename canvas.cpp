@@ -16,16 +16,12 @@ void renderFunction () {
 
 	car.render (cam);
 	glFlush ();
-	car.move(0.00011, 0.0);
+	// car.rotate(0.0011);
 }
 
 
 void init () {
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
-	car.initBuffers ();
-	car.setScale (0.5);
-	car.move(2.0, 1.0);
+	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
 	ShaderInfo shaders[] = {
 		{GL_VERTEX_SHADER, "default.vs.glsl"},
@@ -34,6 +30,11 @@ void init () {
 
 	car.setProgram (loadShaders (shaders));
 	glUseProgram (car.getProgram ());
+
+
+	car.initBuffers ();
+	car.setScale (0.5);
+	car.move(1.0, 1.0);
 }
 
 void reshapeFunction(int w, int h) {

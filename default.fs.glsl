@@ -3,10 +3,13 @@
 // #version 130
 precision highp float; // Defines precision for float and float-derived (vector/matrix) types.
 
+in vec2 UV;
+
+uniform sampler2D texSampler;
 
 out vec4 fColor;
-in vec4 color;
 
 void main () {
-	fColor = color; 
+	fColor = texture(texSampler, UV);
+	// fColor = vec4(0, UV.g ,0, 1);
 }

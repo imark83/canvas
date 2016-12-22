@@ -4,7 +4,7 @@
 CC = g++
 # OBJECTS = coreLoop.o carreterometro.o
 TARGETS = canvas.cpp common/loadShaders.cpp common/triangle.cpp common/car.cpp common/matrix.cpp
-LIBS = -lGL -lGLEW -lglut
+LIBS = -lGL -lGLEW -lglut -lSOIL
 CFLAGS = -g -I include
 
 

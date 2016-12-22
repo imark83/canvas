@@ -11,6 +11,7 @@ public:
 	GLuint buffer;
 	GLuint colorBuffer;
 	GLuint program;
+	GLuint texture;
 
 	~Renderable () {}
 
@@ -29,6 +30,13 @@ public:
 	}
 	GLuint getBuffer () const {
 		return buffer;
+	}
+
+	void setTexture (const GLuint texture) {
+		this->texture = texture;
+	}
+	GLuint getTexture () const {
+		return texture;
 	}
 
 	void setColorBuffer (const GLuint colorBuffer) {

@@ -1,13 +1,14 @@
-#include <matrix.hpp>
-
+#include <iostream>
+#include <SOIL/SOIL.h>
+#include <stdlib.h>
 
 int main(int argc, char const *argv[]) {
-	Mat a(6,7);
-	Mat b(6,7);
+	int width, height;
+	unsigned char *image;
+	image = SOIL_load_image("car.png", &width, &height, 0, SOIL_LOAD_RGB);
+	std::cout << "w = " << width << std::endl;
+	std::cout << "h = " << height << std::endl;
 
-	b(0,4) = 2;
-	b(2,2) = -5;
-
-	std::cout << "rot (30) = " << rotMatrix (30) << std::endl;
+	free (image);
 	return 0;
 }

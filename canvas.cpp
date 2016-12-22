@@ -16,12 +16,12 @@ void renderFunction () {
 
 	car.render (cam);
 	glFlush ();
-	// car.rotate(0.0011);
+	car.rotate(0.01);
 }
 
 
 void init () {
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	ShaderInfo shaders[] = {
 		{GL_VERTEX_SHADER, "default.vs.glsl"},

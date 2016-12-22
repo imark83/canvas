@@ -10,6 +10,6 @@ uniform sampler2D texSampler;
 out vec4 fColor;
 
 void main () {
-	fColor = texture(texSampler, UV);
+	fColor = texture(texSampler, UV).rgba;
 	// fColor = vec4(0, UV.g ,0, 1);
 }

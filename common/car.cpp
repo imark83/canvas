@@ -33,8 +33,8 @@ void Car::initBuffers () {
 
 	int img_width, img_height;
 	unsigned char *image;
-	image = SOIL_load_image("car.png", &img_width, &img_height, 0, SOIL_LOAD_RGB);
-	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, img_width, img_height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	image = SOIL_load_image("car.png", &img_width, &img_height, 0, SOIL_LOAD_RGBA);
+	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGBA, img_width, img_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	std::cout << "sampler = " << glGetUniformLocation(getProgram(), "texSampler") << std::endl;
 	// glUniform1i(glGetUniformLocation(getProgram(), "texSampler"), 0);
 

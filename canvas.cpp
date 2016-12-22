@@ -5,35 +5,35 @@
 
 #include <object.hpp>
 #include <loadShaders.h>
-#include <triangle.hpp>
+#include <car.hpp>
 
-Triangle tr;
+Car car;
 Camera cam(2.0, 2.0);
 
 void renderFunction () {
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable (GL_DEPTH_TEST);
 
-	tr.render (cam);
+	car.render (cam);
 	glFlush ();
-	tr.move(0.00011, 0.0);
+	car.move(0.00011, 0.0);
 }
 
 
 void init () {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-	tr.initBuffers ();
-	tr.setScale (0.5);
-	tr.move(2.0, 1.0);
+	car.initBuffers ();
+	car.setScale (0.5);
+	car.move(2.0, 1.0);
 
 	ShaderInfo shaders[] = {
 		{GL_VERTEX_SHADER, "default.vs.glsl"},
 		{GL_FRAGMENT_SHADER, "default.fs.glsl"},
 		{GL_NONE, NULL}};
 
-	tr.setProgram (loadShaders (shaders));
-	glUseProgram (tr.getProgram ());
+	car.setProgram (loadShaders (shaders));
+	glUseProgram (car.getProgram ());
 }
 
 void reshapeFunction(int w, int h) {

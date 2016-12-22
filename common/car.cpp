@@ -1,7 +1,7 @@
-#include <triangle.hpp>
-#include <matrix.hpp>
+#include <car.hpp>
 
-void Triangle::initBuffers () {
+
+void Car::initBuffers () {
 	GLuint vao, buffer[2];
 	glGenVertexArrays (1, &vao);
 	glGenBuffers (1, buffer);
@@ -12,8 +12,9 @@ void Triangle::initBuffers () {
 	glEnableVertexAttribArray (0);
 
 	setVao (vao); setBuffer (buffer[0]);
+
 }
-void Triangle::render (Camera cam) const {
+void Car::render (Camera cam) const {
 	glBindVertexArray (getVao());
 	glBindBuffer (GL_ARRAY_BUFFER, getBuffer());
 
@@ -21,5 +22,6 @@ void Triangle::render (Camera cam) const {
 	Mat trans = cam.getModel() * getModel();
 	glUniformMatrix4fv (glGetUniformLocation(program, "model"), 1, GL_FALSE, trans.data);
 
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+
 }

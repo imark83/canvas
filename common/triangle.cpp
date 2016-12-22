@@ -18,7 +18,7 @@ void Triangle::render (Camera cam) const {
 	glBindBuffer (GL_ARRAY_BUFFER, getBuffer());
 
 
-	Mat trans = getModel ();
+	Mat trans = cam.getModel() * getModel();
 	glUniformMatrix4fv (glGetUniformLocation(program, "model"), 1, GL_FALSE, trans.data);
 
 	glDrawArrays(GL_TRIANGLES, 0, 6);

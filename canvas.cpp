@@ -8,7 +8,7 @@
 #include <triangle.hpp>
 
 Triangle tr;
-Camera cam;
+Camera cam(-2.0, 2.0, -2.0, 2.0);
 
 void renderFunction () {
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -22,9 +22,9 @@ void init () {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	tr.initBuffers ();
-	tr.setScale (0.5);
-	tr.setPosition (0.5,0.5);
-	tr.move(-0.5,0);
+	// tr.setScale (0.5);
+	// tr.setPosition (0.5,0.5);
+	// tr.move(-0.5,0);
 
 	ShaderInfo shaders[] = {
 		{GL_VERTEX_SHADER, "default.vs.glsl"},

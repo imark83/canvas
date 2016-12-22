@@ -16,6 +16,7 @@ void renderFunction () {
 
 	tr.render (cam);
 	glFlush ();
+	tr.rotate(0.1);
 }
 
 void init () {

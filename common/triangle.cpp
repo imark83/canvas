@@ -13,9 +13,10 @@ void Triangle::initBuffers () {
 
 	setVao (vao); setBuffer (buffer[0]);
 }
-void Triangle::render () const {
+void Triangle::render (Camera cam) const {
 	glBindVertexArray (getVao());
 	glBindBuffer (GL_ARRAY_BUFFER, getBuffer());
+
 
 	Mat trans = getModel ();
 	glUniformMatrix4fv (glGetUniformLocation(program, "model"), 1, GL_FALSE, trans.data);

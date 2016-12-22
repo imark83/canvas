@@ -36,6 +36,7 @@ public:
 	void setRot (float rotation) {this->rotation = rotation;}
 
 	void move (Vector2f delta) {position += delta;}
+	void move (float x, float y) {position += Vector2f(x,y);}
 
 	void rotate (float delta) {rotation += delta;}
 

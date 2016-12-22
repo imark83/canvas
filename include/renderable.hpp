@@ -2,6 +2,7 @@
 #define __RENDERABLE__HPP
 
 #include <GL/glew.h>
+#include <camera.hpp>
 
 class Renderable {
 
@@ -14,7 +15,7 @@ public:
 	~Renderable () {}
 
 	virtual void initBuffers () = 0;
-	virtual void render () const = 0;
+	virtual void render (Camera) const = 0;
 
 	void setVao (const GLuint vao) {
 		this->vao = vao;

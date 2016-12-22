@@ -21,13 +21,9 @@ public:
 
 	void setWidth (float w) {
 		x1 = x0+w;
-		std::cout << "x = [" << x0 << " " << x1 << "]" << std::endl;
-		std::cout << "width = " << getWidth() << std::endl;
 	}
 	void setHeight (float h) {
 		y1 = y0+h;
-		std::cout << "y = [" << y0 << " " << y1 << "]" << std::endl;
-		std::cout << "height = " << getHeight() << std::endl;
 	}
 	Mat getModel () {
 		return scaleMatrix (2.0/getWidth(), 2.0/getHeight()) *

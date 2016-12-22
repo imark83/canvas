@@ -16,7 +16,12 @@ void renderFunction () {
 
 	car.render (cam);
 	glFlush ();
-	car.rotate(0.01);
+	car.rotate(12);
+}
+
+void timerFunction (int value) {
+	glutPostRedisplay();
+	glutTimerFunc (33, timerFunction, value+1);
 }
 
 
@@ -38,7 +43,6 @@ void init () {
 }
 
 void reshapeFunction(int w, int h) {
-	std::cout << "reshape! w = " << w << std::endl;
 	cam.setWidth((2.0*w)/512.0);
 	cam.setHeight((2.0*h)/512.0);
 	glViewport(0,0,w,h);
@@ -61,9 +65,11 @@ int main(int argc, char *argv[]) {
 	// Must be done after glut is initialized!
 	// glewExperimental = GL_TRUE;
 	glewInit();
-	glutIdleFunc (renderFunction);
+	// glutIdleFunc (renderFunction);
 	glutReshapeFunc(reshapeFunction);
 	glutDisplayFunc(renderFunction);
+
+	glutTimerFunc(33, timerFunction, 1000);
 
 
 	init ();

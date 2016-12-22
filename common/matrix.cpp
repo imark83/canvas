@@ -14,6 +14,7 @@ Mat::Mat (int _row, int _col) {
 }
 Mat::Mat (const Mat &op) {
   row = op.row; col = op.col;
+	data = new float[row * col];
   for (int i=0; i<row*col; ++i) data[i] = op.data[i];
 }
 Mat::~Mat () {
@@ -43,9 +44,37 @@ Mat operator* (const Mat &op1, const Mat &op2) {
   return rop;
 }
 std::ostream & operator<< (std::ostream &output, const Mat &op) {
+	output << std::endl;
   for (int i=0; i<op.row; ++i) {
     for (int j=0; j<op.col; ++j) output << "  " << op(i,j);
     output << std::endl;
   }
   return output;
+}
+
+Mat rotMatrix (float angle) {
+	Mat rop(4);
+
+	float rad = M_PI/180.0*angle;
+	rop(0,0) =  cosf(rad);
+	rop(0,1) =  sinf(rad);
+	rop(1,0) = -sinf(rad);
+	rop(1,1) =  cosf(rad);
+
+	return rop;
+}
+
+Mat transMatrix (float x, float y) {
+	Mat rop(4);
+	rop(0,3) = x;
+	rop(1,3) = y;
+	return rop;
+}
+
+Mat scaleMatrix (float scalex, float scaley) {
+	Mat rop(4);
+	rop(0,0) = scalex;
+	rop(1,1) = scaley;
+
+	return rop;
 }

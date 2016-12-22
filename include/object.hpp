@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 #include <math2d.hpp>
 #include <renderable.hpp>
+#include <matrix.hpp>
 
 
 class Object : public Renderable {
@@ -37,6 +38,15 @@ public:
 	void move (Vector2f delta) {position += delta;}
 
 	void rotate (float delta) {rotation += delta;}
+
+	Mat getModel () const {
+		Mat rop(4);
+
+		return transMatrix (position.x, position.y) *
+					rotMatrix(rotation) *
+					scaleMatrix (scale.x, scale.y) * rop;
+	}
+
 };
 
 

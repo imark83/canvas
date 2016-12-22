@@ -1,4 +1,5 @@
 #include <triangle.hpp>
+#include <matrix.hpp>
 
 void Triangle::initBuffers () {
 	GLuint vao, buffer[2];
@@ -15,5 +16,9 @@ void Triangle::initBuffers () {
 void Triangle::render () const {
 	glBindVertexArray (getVao());
 	glBindBuffer (GL_ARRAY_BUFFER, getBuffer());
+
+	Mat trans = getModel ();
+	glUniformMatrix4fv (glGetUniformLocation(program, "model"), 1, GL_FALSE, trans.data);
+
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 }

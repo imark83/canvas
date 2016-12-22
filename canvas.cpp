@@ -20,9 +20,6 @@ void renderFunction () {
 
 void init () {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	// vertex arrays and buffers
-	// glGenVertexArrays (1, &vao);
-	// glGenBuffers (1, &buffer);
 
 	tr.initBuffers ();
 

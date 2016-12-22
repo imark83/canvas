@@ -16,7 +16,7 @@ public:
 	Object ()
 		: scale (1.0, 1.0), position (0.0, 0.0), rotation (0.0), Renderable() {}
 	Object (Vector2f _scale, Vector2f _position, Vector2f _rotation);
-	~Object () {}
+	// ~Object () {}
 
 	void setScale (float sc) {scale.x = scale.y = sc;}
 

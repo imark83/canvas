@@ -28,3 +28,7 @@
 *.out
 *.app
 aaa
+
+# Useless images
+car.jpg
+homer.png

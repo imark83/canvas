@@ -1,14 +1,18 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 #include <iostream>
+#include <cmath>
 
 
 #include <object.hpp>
 #include <loadShaders.h>
 #include <car.hpp>
 
+
+Vector2f windowSize (512, 512);
+Vector2f canvasSize (5, 5);
 Car car;
-Camera cam(2.0, 2.0);
+Camera cam(canvasSize.x, canvasSize.y);
 
 void renderFunction () {
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -16,12 +20,16 @@ void renderFunction () {
 
 	car.render (cam);
 	glFlush ();
-	car.rotate(12);
 }
 
 void timerFunction (int value) {
+	std::cout << value << std::endl;
+	car.setPosition(2.5+2.0*cos(2.0*M_PI*value/360.0), 2.5+2.0*sin(2.0*M_PI*value/360.0));
+	car.setRot (-value);
+	// car.move ((float) sin(value/3600), cos(value/3600));
 	glutPostRedisplay();
 	glutTimerFunc (33, timerFunction, value+1);
+
 }
 
 
@@ -43,8 +51,8 @@ void init () {
 }
 
 void reshapeFunction(int w, int h) {
-	cam.setWidth((2.0*w)/512.0);
-	cam.setHeight((2.0*h)/512.0);
+	cam.setWidth((canvasSize.x*w)/windowSize.x);
+	cam.setHeight((canvasSize.y*h)/windowSize.y);
 	glViewport(0,0,w,h);
 }
 
@@ -69,7 +77,7 @@ int main(int argc, char *argv[]) {
 	glutReshapeFunc(reshapeFunction);
 	glutDisplayFunc(renderFunction);
 
-	glutTimerFunc(33, timerFunction, 1000);
+	glutTimerFunc(33, timerFunction, 0);
 
 
 	init ();

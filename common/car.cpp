@@ -2,6 +2,20 @@
 #include <SOIL/SOIL.h>
 
 
+Car::Car () {
+	p[0] = Vector2f (-0.5,-1.0);
+	p[1] = Vector2f ( 0.5,-1.0);
+	p[2] = Vector2f ( 0.5, 1.0);
+	p[3] = Vector2f (-0.5, 1.0);
+	p[4] = Vector2f ( 0.0, 1.0);
+	p[5] = Vector2f ( 1.0, 1.0);
+	p[6] = Vector2f ( 1.0, 0.0);
+	p[7] = Vector2f ( 0.0, 0.0);
+
+	wheelPosition = speed = 0.0;
+	throttle = gear = 0;
+}
+
 void Car::initBuffers () {
 	glUseProgram (getProgram());
 	// VERTEX ARRAY Y BUFFER

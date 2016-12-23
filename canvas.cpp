@@ -23,7 +23,6 @@ void renderFunction () {
 }
 
 void timerFunction (int value) {
-	std::cout << value << std::endl;
 	car.setPosition(2.5+2.0*cos(2.0*M_PI*value/360.0), 2.5+2.0*sin(2.0*M_PI*value/360.0));
 	car.setRot (-value);
 	// car.move ((float) sin(value/3600), cos(value/3600));
@@ -57,6 +56,14 @@ void reshapeFunction(int w, int h) {
 }
 
 
+void keyboardFunction(unsigned char key, int x, int y) {
+	std::cout << "key " << key << " pressed" << std::endl;
+}
+
+void keyboardUpFunction(unsigned char key, int x, int y) {
+	std::cout << "key " << key << " released" << std::endl;
+}
+
 
 int main(int argc, char *argv[]) {
 	// init glut
@@ -76,7 +83,9 @@ int main(int argc, char *argv[]) {
 	// glutIdleFunc (renderFunction);
 	glutReshapeFunc(reshapeFunction);
 	glutDisplayFunc(renderFunction);
-
+	glutKeyboardFunc(keyboardFunction);
+	glutKeyboardUpFunc(keyboardUpFunction);
+	glutIgnoreKeyRepeat(1);
 	glutTimerFunc(33, timerFunction, 0);
 
 

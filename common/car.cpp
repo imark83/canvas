@@ -71,3 +71,24 @@ void Car::render (Camera cam) const {
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
 }
+
+
+
+// CAMBIAR CONTROL DE COCHE
+void wheelStep () {
+	
+}
+void accelerate () {
+
+}
+void stop () {
+
+}
+void none () {
+
+}
+
+// ACTUALIZAR POSICION DE COCHE DE ACUERDO CON EL CONTROL
+void motionStep (int millis) {
+
+}

@@ -75,20 +75,51 @@ void Car::render (Camera cam) const {
 
 
 // CAMBIAR CONTROL DE COCHE
-void wheelStep () {
-	
+void wheelStep (float angle) {
+	wheelPosition += angle;
+	if (wheelPosition > 40) angle = 40;
+	if (wheelPosition < -40) angle = -40;
 }
-void accelerate () {
-
+void throttle () {
+	pedal = 1;
 }
-void stop () {
-
+void brake () {
+	pedal = -1;
 }
-void none () {
-
+void gearUp () {
+	++gear;
+	if (gear > 2) gear = 2;
+}
+void gearDown () {
+	--gear;
+	if (gear < -1) gear = -1;
 }
 
 // ACTUALIZAR POSICION DE COCHE DE ACUERDO CON EL CONTROL
 void motionStep (int millis) {
+	// update speed
+	float acceleration;
+	switch (pedal) {
+		case -1:
+			if (speed > 0) acceleration = -30;
+			else if (speed == 0) acceleration = 0.0;
+			else acceleration = +30;
+			break;
+		case 0:
+			if (speed > 1) acceleration = -2;
+			else if (speed == )
+	}
+	switch (gear) {
+		case -1:
+			switch (pedal) {
+				case 0:
+			}
+			break;
+		case 0:
+		case 1:
+		case 2:
+	}
+	if (speed >= 20 * geal)
+	// primer prototipo.
 
 }

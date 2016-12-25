@@ -11,8 +11,8 @@ public:
 
 	// VARIABLES DE ESTADO DE CONTROL DE COCHE
 	float wheelPosition; // con respecto al eje del coche
-	int pedal;	// 
-	int gear;
+	int pedal;	// -1 brake, +1 accelerate, 0 none
+	int gear;		// -1 0 1 2
 
 	// VARIABLE FISICAS (JUNTAR CON LAS DE OBJECT)
 	// JUNTAR CON POSITION, ROTATION
@@ -21,10 +21,11 @@ public:
 	Car ();
 
 	// CAMBIAR CONTROL DE COCHE
-	void wheelStep (float angle;);
-	void accelerate ();
-	void stop ();
-	void none ();
+	void wheelStep (float angle);
+	void throttle ();
+	void brake ();
+	void gearUp ();
+	void gearDown ();
 
 	// ACTUALIZAR POSICION DE COCHE DE ACUERDO CON EL CONTROL
 	void motionStep (int millis);

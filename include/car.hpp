@@ -14,6 +14,16 @@ public:
 	int pedal;	// -1 brake, +1 accelerate, 0 none
 	int gear;		// -1 0 1 2
 
+
+	// VARIABLES DE PRESTACIONES DEL COCHE
+	float brk_acc;			// aceleracion del freno
+	float max_acc;			// aceleracion maxima (drive and rear)
+	float def_acc;			// aceleracion/deceleracion a ralenti
+	float max_speed;		// velocidad maxima hacia adelante
+	float min_speed;		// velocidad maxima hacia atras
+	float def_speed;		// velocidad de ralenti (drive and rear)
+
+
 	// VARIABLE FISICAS (JUNTAR CON LAS DE OBJECT)
 	// JUNTAR CON POSITION, ROTATION
 	float speed;
@@ -24,6 +34,7 @@ public:
 	void wheelStep (float angle);
 	void throttle ();
 	void brake ();
+	void releasePedal ();
 	void gearUp ();
 	void gearDown ();
 

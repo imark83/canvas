@@ -1,6 +1,11 @@
 #ifndef __MATH2D_HPP__
 #define __MATH2D_HPP__
 
+template <typename T>
+int sgn(T val) {
+    return (T(0) < val) - (val < T(0));
+}
+
 struct Vector2f {
 public:
 	float x;

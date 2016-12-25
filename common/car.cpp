@@ -14,6 +14,13 @@ Car::Car () {
 
 	wheelPosition = speed = 0.0;
 	throttle = gear = 0;
+
+	brk_acc = -10.0;
+	max_acc = 2.5;
+	def_acc = 1.0;
+	max_speed = 10.0;
+	min_speed = -8.0;
+	def_speed = 3.0;
 }
 
 void Car::initBuffers () {
@@ -86,9 +93,12 @@ void throttle () {
 void brake () {
 	pedal = -1;
 }
+void releasePedal () {
+	pedal = 0;
+}
 void gearUp () {
 	++gear;
-	if (gear > 2) gear = 2;
+	if (gear > 1) gear = 1;
 }
 void gearDown () {
 	--gear;
@@ -98,28 +108,27 @@ void gearDown () {
 // ACTUALIZAR POSICION DE COCHE DE ACUERDO CON EL CONTROL
 void motionStep (int millis) {
 	// update speed
-	float acceleration;
+	float deltaV;
+	float deltaT = (millis/1000.0);
 	switch (pedal) {
 		case -1:
-			if (speed > 0) acceleration = -30;
-			else if (speed == 0) acceleration = 0.0;
-			else acceleration = +30;
+			deltaV = brk_acc * sgn<float>(speed) * deltaT;
+			if (fabs(deltaV) > fabs(speed)) speed = 0;
+			else speed += deltaV;
 			break;
-		case 0:
-			if (speed > 1) acceleration = -2;
-			else if (speed == )
-	}
-	switch (gear) {
-		case -1:
-			switch (pedal) {
-				case 0:
-			}
-			break;
-		case 0:
 		case 1:
-		case 2:
+			if (gear == 0) break;
+			deltaV = max_acc * gear * deltaT;
+			if (speed > max_speed) speed = max_speed;
+			if (speed < min_speed) speed = min_speed;
+			break;
+		case 0:
+			if (gear == 0) break;
+			deltaV = sgn<float> (def_speed*gear - speed) * def_acc * deltaT;
+			float vf = speed + deltaV;
+			if ((vf - def_speed*gear)*(speed - def_speed*gear) < 0.0)
+				speed = def_speed*gear;
+			else speed = vf;
+			break;
 	}
-	if (speed >= 20 * geal)
-	// primer prototipo.
-
 }

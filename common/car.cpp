@@ -13,7 +13,7 @@ Car::Car () {
 	p[7] = Vector2f ( 0.0, 0.0);
 
 	wheelPosition = speed = 0.0;
-	throttle = gear = 0;
+	pedal = gear = 0;
 
 	brk_acc = -10.0;
 	max_acc = 2.5;
@@ -82,31 +82,31 @@ void Car::render (Camera cam) const {
 
 
 // CAMBIAR CONTROL DE COCHE
-void wheelStep (float angle) {
+void Car::wheelStep (float angle) {
 	wheelPosition += angle;
 	if (wheelPosition > 40) angle = 40;
 	if (wheelPosition < -40) angle = -40;
 }
-void throttle () {
+void Car::throttle () {
 	pedal = 1;
 }
-void brake () {
+void Car::brake () {
 	pedal = -1;
 }
-void releasePedal () {
+void Car::releasePedal () {
 	pedal = 0;
 }
-void gearUp () {
+void Car::gearUp () {
 	++gear;
 	if (gear > 1) gear = 1;
 }
-void gearDown () {
+void Car::gearDown () {
 	--gear;
 	if (gear < -1) gear = -1;
 }
 
 // ACTUALIZAR POSICION DE COCHE DE ACUERDO CON EL CONTROL
-void motionStep (int millis) {
+void Car::motionStep (int millis) {
 	// update speed
 	float deltaV;
 	float deltaT = (millis/1000.0);
@@ -119,6 +119,7 @@ void motionStep (int millis) {
 		case 1:
 			if (gear == 0) break;
 			deltaV = max_acc * gear * deltaT;
+			speed += deltaV;
 			if (speed > max_speed) speed = max_speed;
 			if (speed < min_speed) speed = min_speed;
 			break;
@@ -131,4 +132,10 @@ void motionStep (int millis) {
 			else speed = vf;
 			break;
 	}
+
+	// MOVE THE CAR
+	float deltaX = speed * deltaT;
+	move (-sin(2.0*M_PI*rotation/360.0)*deltaX,
+	 		cos(2.0*M_PI*rotation/360.0)*deltaX);
+
 }

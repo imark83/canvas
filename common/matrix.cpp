@@ -57,8 +57,8 @@ Mat rotMatrix (float angle) {
 
 	float rad = M_PI/180.0*angle;
 	rop(0,0) =  cosf(rad);
-	rop(0,1) =  sinf(rad);
-	rop(1,0) = -sinf(rad);
+	rop(0,1) = -sinf(rad);
+	rop(1,0) =  sinf(rad);
 	rop(1,1) =  cosf(rad);
 
 	return rop;

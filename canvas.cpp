@@ -9,8 +9,8 @@
 #include <car.hpp>
 
 
-Vector2f windowSize (512, 512);
-Vector2f canvasSize (5, 5);
+Vector2f windowSize (1024, 512);
+Vector2f canvasSize (30, 15);
 Car car;
 Camera cam(canvasSize.x, canvasSize.y);
 
@@ -23,12 +23,12 @@ void renderFunction () {
 }
 
 void timerFunction (int value) {
-	car.setPosition(2.5+2.0*cos(2.0*M_PI*value/360.0), 2.5+2.0*sin(2.0*M_PI*value/360.0));
-	car.setRot (-value);
+	// car.setRot (-value);
 	// car.move ((float) sin(value/3600), cos(value/3600));
+	car.motionStep(33);
+	std::cout << "speed = " << car.speed << std::endl;
 	glutPostRedisplay();
 	glutTimerFunc (33, timerFunction, value+1);
-
 }
 
 
@@ -45,8 +45,12 @@ void init () {
 
 
 	car.initBuffers ();
-	car.setScale (0.5);
-	car.move(1.0, 1.0);
+	car.setScale (3.0);
+	car.move(5, 5);
+	car.setRot (-70);
+
+
+	car.speed=1;
 }
 
 void reshapeFunction(int w, int h) {
@@ -57,20 +61,71 @@ void reshapeFunction(int w, int h) {
 
 
 void keyboardFunction(unsigned char key, int x, int y) {
-	std::cout << "key " << key << " pressed" << std::endl;
+	// std::cout << "key pressed" << '\n';
+	switch (key) {
+		case 'a':
+		case 'A':
+			car.gearUp();
+			// std::cout << "gear = " << car.gear << '\n';
+			break;
+		case 'z':
+		case 'Z':
+			car.gearDown();
+			// std::cout << "gear = " << car.gear << '\n';
+			break;
+	}
+}
+void specKeyboardFunction (int key, int x, int y) {
+	// std::cout << "special key pressed" << '\n';
+	switch (key) {
+		case GLUT_KEY_UP:
+			car.throttle ();
+			// std::cout << "pedal = " << car.pedal << '\n';
+			break;
+		case GLUT_KEY_DOWN:
+			car.brake();
+			// std::cout << "pedal = " << car.pedal << '\n';
+			break;
+		case GLUT_KEY_LEFT:
+			break;
+		case GLUT_KEY_RIGHT:
+			break;
+	}
 }
 
 void keyboardUpFunction(unsigned char key, int x, int y) {
-	std::cout << "key " << key << " released" << std::endl;
+	// std::cout << "key released" << '\n';
+	// switch (key) {
+	// 	case 'a':
+	// 	case 'A':
+	// 		break;
+	// 	case 'z':
+	// 	case 'Z':
+	// 		break;
+	// }
 }
 
+void specKeyboardUpFunction (int key, int x, int y) {
+	// std::cout << "special key released" << '\n';
+	switch (key) {
+		case GLUT_KEY_UP:
+		case GLUT_KEY_DOWN:
+			car.releasePedal ();
+			// std::cout << "pedal = " << car.pedal << '\n';
+			break;
+		case GLUT_KEY_LEFT:
+			break;
+		case GLUT_KEY_RIGHT:
+			break;
+	}
+}
 
 int main(int argc, char *argv[]) {
 	// init glut
 	glutInit(&argc, argv);
 	// init display con DEPTH Y RGBA
 	glutInitDisplayMode (GLUT_RGBA | GLUT_DEPTH);
-	glutInitWindowSize(512, 512);
+	glutInitWindowSize(windowSize.x, windowSize.y);
 	glutInitWindowPosition(100, 100);
 
 
@@ -85,6 +140,8 @@ int main(int argc, char *argv[]) {
 	glutDisplayFunc(renderFunction);
 	glutKeyboardFunc(keyboardFunction);
 	glutKeyboardUpFunc(keyboardUpFunction);
+	glutSpecialFunc(specKeyboardFunction);
+	glutSpecialUpFunc(specKeyboardUpFunction);
 	glutIgnoreKeyRepeat(1);
 	glutTimerFunc(33, timerFunction, 0);
 

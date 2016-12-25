@@ -10,7 +10,7 @@
 
 
 Vector2f windowSize (1024, 512);
-Vector2f canvasSize (50, 15);
+Vector2f canvasSize (50, 25);
 Car car;
 Camera cam(canvasSize.x, canvasSize.y);
 

@@ -27,6 +27,8 @@ void timerFunction (int value) {
 	// car.move ((float) sin(value/3600), cos(value/3600));
 	car.motionStep(33);
 	std::cout << "speed = " << car.speed << std::endl;
+	std::cout << "steering = " << car.steeringOrientation << '\n';
+	std::cout << "steering angle = " << car.wheelPosition << '\n';
 	glutPostRedisplay();
 	glutTimerFunc (33, timerFunction, value+1);
 }
@@ -51,6 +53,7 @@ void init () {
 
 
 	car.speed=1;
+	car.wheelPosition = 90.0;
 }
 
 void reshapeFunction(int w, int h) {
@@ -87,8 +90,10 @@ void specKeyboardFunction (int key, int x, int y) {
 			// std::cout << "pedal = " << car.pedal << '\n';
 			break;
 		case GLUT_KEY_LEFT:
+			car.turnLeft();
 			break;
 		case GLUT_KEY_RIGHT:
+			car.turnRight();
 			break;
 	}
 }
@@ -114,8 +119,10 @@ void specKeyboardUpFunction (int key, int x, int y) {
 			// std::cout << "pedal = " << car.pedal << '\n';
 			break;
 		case GLUT_KEY_LEFT:
+			car.releaseHandle();
 			break;
 		case GLUT_KEY_RIGHT:
+			car.releaseHandle();
 			break;
 	}
 }

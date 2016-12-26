@@ -21,6 +21,8 @@ Car::Car () {
 	max_speed = 10.0;
 	min_speed = -8.0;
 	def_speed = 3.0;
+
+	interaxis_length = 3.0;
 }
 
 void Car::initBuffers () {
@@ -87,6 +89,18 @@ void Car::wheelStep (float angle) {
 	if (wheelPosition > 40) angle = 40;
 	if (wheelPosition < -40) angle = -40;
 }
+
+
+void Car::turnLeft () {
+	steeringOrientation = 1;
+}
+void Car::turnRight () {
+	steeringOrientation = -1;
+}
+void Car::releaseHandle () {
+	steeringOrientation = 0;
+}
+
 void Car::throttle () {
 	pedal = 1;
 }
@@ -133,9 +147,36 @@ void Car::motionStep (int millis) {
 			break;
 	}
 
+	// UPDATE STEERING WHEEL
+	switch (steeringOrientation) {
+		case 1: wheelStep(2.0);
+			break;
+		case -1: wheelStep(-2.0);
+			break;
+	}
+
 	// MOVE THE CAR
-	float deltaX = speed * deltaT;
-	move (-sin(2.0*M_PI*rotation/360.0)*deltaX,
-	 		cos(2.0*M_PI*rotation/360.0)*deltaX);
+
+	if (wheelPosition != 0.0) {
+		Vector2f deltaX;
+		float deltaTheta =
+		 		fabs(sin(2.0*M_PI*wheelPosition/360.0)*
+				speed*millis/(1000.0*interaxis_length));
+
+		float beta = atan (tan(2.0*M_PI*wheelPosition/360.0)/2.0);
+
+		float Rc = interaxis_length / (2.0 * fabs (sin(beta)));
+
+		float aux = 2.0*M_PI*rotation/360.0 + beta;
+
+		deltaX.x = Rc * ((cos(deltaTheta)-1.0)*cos(aux) - sin(deltaTheta)*sin(aux));
+		deltaX.y = Rc * ((cos(deltaTheta)-1.0)*sin(aux) + sin(deltaTheta)*cos(aux));
+		move (deltaX);
+		rotate (360.0*deltaTheta/(2.0*M_PI));
+	} else {
+		float deltaX = speed * deltaT;
+		move (-sin(2.0*M_PI*rotation/360.0)*deltaX,
+		 		cos(2.0*M_PI*rotation/360.0)*deltaX);
+	}
 
 }

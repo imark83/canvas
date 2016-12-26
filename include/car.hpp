@@ -7,12 +7,17 @@
 
 class Car : public Object {
 public:
+
+	// GEOMETRIA DEL COCHE
+	float interaxis_length;
+
 	Vector2f p[8];
 
 	// VARIABLES DE ESTADO DE CONTROL DE COCHE
 	float wheelPosition; // con respecto al eje del coche
 	int pedal;	// -1 brake, +1 accelerate, 0 none
 	int gear;		// -1 0 1 2
+	int steeringOrientation; // +1-> Left, 0->None, -1-> Right
 
 
 	// VARIABLES DE PRESTACIONES DEL COCHE
@@ -37,6 +42,9 @@ public:
 	void releasePedal ();
 	void gearUp ();
 	void gearDown ();
+	void turnLeft ();
+	void turnRight ();
+	void releaseHandle ();
 
 	// ACTUALIZAR POSICION DE COCHE DE ACUERDO CON EL CONTROL
 	void motionStep (int millis);

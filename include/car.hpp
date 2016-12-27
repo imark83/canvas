@@ -34,6 +34,7 @@ public:
 	float speed;
 
 	Car ();
+	void setScale (float sc);
 
 	// CAMBIAR CONTROL DE COCHE
 	void wheelStep (float angle);

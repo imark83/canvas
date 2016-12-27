@@ -27,8 +27,7 @@ void timerFunction (int value) {
 	// car.move ((float) sin(value/3600), cos(value/3600));
 	car.motionStep(33);
 	std::cout << "speed = " << car.speed << std::endl;
-	std::cout << "steering = " << car.steeringOrientation << '\n';
-	std::cout << "steering angle = " << car.wheelPosition << '\n';
+	std::cout << "steering angle = " << car.wheelPosition << '\n' << std::endl;
 	glutPostRedisplay();
 	glutTimerFunc (33, timerFunction, value+1);
 }
@@ -53,7 +52,7 @@ void init () {
 
 
 	car.speed=1;
-	car.wheelPosition = 90.0;
+	// car.wheelPosition = -89.99;
 }
 
 void reshapeFunction(int w, int h) {

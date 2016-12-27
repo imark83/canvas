@@ -19,7 +19,7 @@ public:
 	Object (Vector2f _scale, Vector2f _position, Vector2f _rotation);
 	// ~Object () {}
 
-	void setScale (float sc) {scale.x = scale.y = sc;}
+	virtual void setScale (float sc) {scale.x = scale.y = sc;}
 
 	void setScale (float scale_x, float scale_y) {
 		scale.x = scale_x; scale.y = scale_y;

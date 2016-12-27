@@ -22,7 +22,12 @@ Car::Car () {
 	min_speed = -8.0;
 	def_speed = 3.0;
 
-	interaxis_length = 3.0;
+	interaxis_length = 2.0;
+}
+
+void Car::setScale (float sc) {
+	Object::setScale(sc);
+	interaxis_length *= sc;
 }
 
 void Car::initBuffers () {
@@ -86,8 +91,8 @@ void Car::render (Camera cam) const {
 // CAMBIAR CONTROL DE COCHE
 void Car::wheelStep (float angle) {
 	wheelPosition += angle;
-	if (wheelPosition > 40) angle = 40;
-	if (wheelPosition < -40) angle = -40;
+	if (wheelPosition > 40) wheelPosition = 40;
+	if (wheelPosition < -40) wheelPosition = -40;
 }
 
 
@@ -160,12 +165,12 @@ void Car::motionStep (int millis) {
 	if (wheelPosition != 0.0) {
 		Vector2f deltaX;
 		float deltaTheta =
-		 		fabs(sin(2.0*M_PI*wheelPosition/360.0)*
-				speed*millis/(1000.0*interaxis_length));
+		 		sin(2.0*M_PI*wheelPosition/360.0)*
+				speed*millis/(1000.0*interaxis_length);
 
 		float beta = atan (tan(2.0*M_PI*wheelPosition/360.0)/2.0);
 
-		float Rc = interaxis_length / (2.0 * fabs (sin(beta)));
+		float Rc = interaxis_length / (2.0 * sin(beta));
 
 		float aux = 2.0*M_PI*rotation/360.0 + beta;
 

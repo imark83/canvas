@@ -16,7 +16,7 @@ public:
 
 	Object ()
 		: scale (1.0, 1.0), position (0.0, 0.0), rotation (0.0), Renderable() {}
-	Object (Vector2f _scale, Vector2f _position, Vector2f _rotation);
+	// Object (Vector2f _scale, Vector2f _position, float _rotation);
 	// ~Object () {}
 
 	virtual void setScale (float sc) {scale.x = scale.y = sc;}
@@ -25,13 +25,13 @@ public:
 		scale.x = scale_x; scale.y = scale_y;
 	}
 
-	void setScale (Vector2f scale) {this->scale = scale;}
+	void setScale (const Vector2f &scale) {this->scale = scale;}
 
 	void setPosition (float x, float y) {
 		position.x = x; position.y = y;
 	}
 
-	void setPosition (Vector2f x) {position = x;}
+	void setPosition (const Vector2f &x) {position = x;}
 
 	void setRot (float rotation) {this->rotation = rotation;}
 

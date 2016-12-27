@@ -15,14 +15,41 @@ Car::Car () {
 	wheelPosition = speed = 0.0;
 	pedal = gear = 0;
 
-	brk_acc = -10.0;
+	brk_acc = -15.0;
 	max_acc = 2.5;
 	def_acc = 1.0;
-	max_speed = 10.0;
+	max_speed = 30.0;
 	min_speed = -8.0;
 	def_speed = 3.0;
 
 	interaxis_length = 2.0;
+}
+
+Car::Car (const Car &op) {
+	Object::setScale (op.scale);
+	Object::setPosition (op.position);
+	Object::setRot (op.rotation);
+	p[0] =op.p[0];
+	p[1] =op.p[1];
+	p[2] =op.p[2];
+	p[3] =op.p[3];
+	p[4] =op.p[4];
+	p[5] =op.p[5];
+	p[6] =op.p[6];
+	p[7] =op.p[7];
+
+	wheelPosition = op.wheelPosition;
+	speed = op.speed;
+	pedal = op.pedal;
+	gear = op.gear;
+	brk_acc = op.brk_acc;
+	max_acc = op.max_acc;
+	def_acc = op.def_acc;
+	max_speed = op.max_speed;
+	min_speed = op.min_speed;
+	def_speed = op.def_speed;
+	interaxis_length = op.interaxis_length;
+
 }
 
 void Car::setScale (float sc) {
@@ -78,8 +105,18 @@ void Car::render (Camera cam) const {
 	glBindBuffer (GL_ARRAY_BUFFER, getBuffer());
 	glBindTexture(GL_TEXTURE_2D, getTexture());
 
+	Car clone(*this);
+	while (clone.position.x > cam.x1)
+		clone.position.x -= cam.getWidth();
+	while (clone.position.x < cam.x0)
+		clone.position.x += cam.getWidth();
 
-	Mat trans = cam.getModel() * getModel();
+	while (clone.position.y > cam.y1)
+		clone.position.y -= cam.getHeight();
+	while (clone.position.y < cam.y0)
+		clone.position.y += cam.getHeight();
+
+	Mat trans = cam.getModel() * clone.getModel();
 	glUniformMatrix4fv (glGetUniformLocation(program, "model"), 1, GL_FALSE, trans.data);
 
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);

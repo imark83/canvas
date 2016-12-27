@@ -34,6 +34,7 @@ public:
 	float speed;
 
 	Car ();
+	Car (const Car &op);
 	void setScale (float sc);
 
 	// CAMBIAR CONTROL DE COCHE

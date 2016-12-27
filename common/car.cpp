@@ -22,7 +22,7 @@ Car::Car () {
 	min_speed = -8.0;
 	def_speed = 3.0;
 
-	interaxis_length = 2.0;
+	interaxis_length = 1.8;
 }
 
 Car::Car (const Car &op) {
@@ -85,7 +85,7 @@ void Car::initBuffers () {
 
 	int img_width, img_height;
 	unsigned char *image;
-	image = SOIL_load_image("car.png", &img_width, &img_height, 0, SOIL_LOAD_RGBA);
+	image = SOIL_load_image("car2.png", &img_width, &img_height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGBA, img_width, img_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 
 

@@ -10,7 +10,7 @@
 
 
 Vector2f windowSize (1024, 512);
-Vector2f canvasSize (100, 50);
+Vector2f canvasSize (40, 20);
 Car car;
 Camera cam(canvasSize.x, canvasSize.y);
 
@@ -46,7 +46,7 @@ void init () {
 
 
 	car.initBuffers ();
-	car.setScale (3.0);
+	car.setScale (2.19);
 	car.move(10, 10);
 	car.setRot (-90);
 

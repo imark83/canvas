@@ -36,7 +36,8 @@ void timerFunction (int value) {
 void init () {
 	glEnable (GL_BLEND);
 	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	// glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.12500f, 0.57812f, 0.11719f, 1.0f);
 
 	ShaderInfo shaders[] = {
 		{GL_VERTEX_SHADER, "default.vs.glsl"},

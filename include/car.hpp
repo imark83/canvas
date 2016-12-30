@@ -5,6 +5,9 @@
 #include <math2d.hpp>
 #include <object.hpp>
 
+
+enum model_t {DEFAULT, ROVER};
+
 class Car : public Object {
 public:
 
@@ -33,7 +36,7 @@ public:
 	// JUNTAR CON POSITION, ROTATION
 	float speed;
 
-	Car ();
+	Car (int = 0);
 	Car (const Car &op);
 	void setScale (float sc);
 

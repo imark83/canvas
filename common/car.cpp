@@ -2,7 +2,7 @@
 #include <SOIL/SOIL.h>
 
 
-Car::Car () {
+Car::Car (int model) {
 	p[0] = Vector2f (-0.5,-1.0);
 	p[1] = Vector2f ( 0.5,-1.0);
 	p[2] = Vector2f ( 0.5, 1.0);
@@ -15,14 +15,17 @@ Car::Car () {
 	wheelPosition = speed = 0.0;
 	pedal = gear = 0;
 
-	brk_acc = -15.0;
-	max_acc = 2.5;
-	def_acc = 1.0;
-	max_speed = 30.0;
-	min_speed = -8.0;
-	def_speed = 3.0;
-
-	interaxis_length = 1.8;
+	switch (model) {
+		case DEFAULT:
+			brk_acc = -15.0;
+			max_acc = 2.5;
+			def_acc = 1.0;
+			max_speed = 30.0;
+			min_speed = -8.0;
+			def_speed = 3.0;
+			break;
+	}
+		interaxis_length = 1.8;
 }
 
 Car::Car (const Car &op) {

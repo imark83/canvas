@@ -106,15 +106,29 @@ void Car::render (Camera cam) const {
 	glBindTexture(GL_TEXTURE_2D, getTexture());
 
 	Car clone(*this);
-	while (clone.position.x > cam.x1)
-		clone.position.x -= cam.getWidth();
-	while (clone.position.x < cam.x0)
-		clone.position.x += cam.getWidth();
+	int modulo = (int) floor (position.x/cam.getWidth());
+	if (clone.position.x > cam.x1) {
+		if (modulo % 2) {
+			clone.position.x -= modulo*cam.getWidth();
+			clone.position.y = cam.y1 - clone.position.y;
+			clone.rotation = 180.0 - clone.rotation;
+		} else {
+			clone.position.x -= modulo*cam.getWidth();
+		}
+	}
+	// if (clone.position.x < cam.x0){
+	// 	clone.position.x = cam.x1;
+	// 	clone.position.y = cam.y1 - clone.position.y;
+	// 	clone.rotation = 180.0 - clone.rotation;
+	// }
 
-	while (clone.position.y > cam.y1)
-		clone.position.y -= cam.getHeight();
-	while (clone.position.y < cam.y0)
-		clone.position.y += cam.getHeight();
+	std::cout << "x = " << position.x << "/" << cam.x1 << std::endl;
+	std::cout << "mod = " << floor (position.x/cam.getWidth()) << '\n';
+
+	// if (clone.position.y > cam.y1)
+	// 	clone.position.y -= cam.getHeight();
+	// if (clone.position.y < cam.y0)
+	// 	clone.position.y += cam.getHeight();
 
 	Mat trans = cam.getModel() * clone.getModel();
 	glUniformMatrix4fv (glGetUniformLocation(program, "model"), 1, GL_FALSE, trans.data);

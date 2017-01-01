@@ -4,6 +4,7 @@
 
 #include <math2d.hpp>
 #include <object.hpp>
+#include <caravan.hpp>
 
 
 enum model_t {DEFAULT, ROVER};
@@ -36,9 +37,18 @@ public:
 	// JUNTAR CON POSITION, ROTATION
 	float speed;
 
+
+	// CARAVAN ATTACHED
+	Caravan *caravan;
+
 	Car (int = 0);
 	Car (const Car &op);
+	~Car();
 	void setScale (float sc);
+
+
+	// ATTACH Caravan
+	void attachCaravan (int = 0);
 
 	// CAMBIAR CONTROL DE COCHE
 	void wheelStep (float angle);

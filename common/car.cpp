@@ -25,7 +25,8 @@ Car::Car (int model) {
 			def_speed = 3.0;
 			break;
 	}
-		interaxis_length = 1.8;
+	interaxis_length = 1.8;
+	caravan = NULL;
 }
 
 Car::Car (const Car &op) {
@@ -52,7 +53,18 @@ Car::Car (const Car &op) {
 	min_speed = op.min_speed;
 	def_speed = op.def_speed;
 	interaxis_length = op.interaxis_length;
+	caravan = NULL;
+}
 
+Car::~Car () {
+	if (caravan != NULL) {
+		delete caravan;
+	}
+}
+
+void Car::attachCaravan (int caravan_model) {
+	caravan = new Caravan (caravan_model);
+	// caravan->setProgram (program);
 }
 
 void Car::setScale (float sc) {

@@ -19,6 +19,8 @@ void renderFunction () {
 	glEnable (GL_DEPTH_TEST);
 
 	car.render (cam);
+
+	car.caravan->render(cam);
 	glFlush ();
 }
 
@@ -28,6 +30,9 @@ void timerFunction (int value) {
 	car.motionStep(33);
 	std::cout << "speed = " << car.speed << std::endl;
 	std::cout << "steering angle = " << car.wheelPosition << '\n' << std::endl;
+
+
+
 	glutPostRedisplay();
 	glutTimerFunc (33, timerFunction, value+1);
 }
@@ -37,7 +42,8 @@ void init () {
 	glEnable (GL_BLEND);
 	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	// glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClearColor(0.12500f, 0.57812f, 0.11719f, 1.0f);
+	glClearColor (26.0/256.0, 102.0/256.0, 46.0/256.0, 1.0f);
+	// glClearColor(0.12500f, 0.57812f, 0.11719f, 1.0f);
 
 	ShaderInfo shaders[] = {
 		{GL_VERTEX_SHADER, "default.vs.glsl"},
@@ -52,6 +58,10 @@ void init () {
 	car.setScale (2.19);
 	car.move(10, 10);
 	car.setRot (-90);
+	car.attachCaravan();
+	car.caravan->setScale (2.19);
+	car.caravan->move (5,5);
+
 
 
 	// car.speed=1;

@@ -24,7 +24,7 @@ Car::Car (int model) {
 			def_acc = 1.0;
 			max_speed = 30.0;
 			min_speed = -8.0;
-			def_speed = 3.0;
+			def_speed = 1.0;
 			interaxis_length = 2.62;
 			setScale (width/2.0, length/2.0);
 			break;

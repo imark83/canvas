@@ -2,7 +2,7 @@
 #include <SOIL/SOIL.h>
 
 Caravan::Caravan (int caravan_model) {
-	
+
 	// DESIGN VARIABLES
 	float length;
 	float width;
@@ -18,10 +18,10 @@ Caravan::Caravan (int caravan_model) {
 	p[1] = Vector2f ( 0.5,-1.0);
 	p[2] = Vector2f ( 0.5, 1.0);
 	p[3] = Vector2f (-0.5, 1.0);
-	p[4] = Vector2f ( 0.0, 1.0);
-	p[5] = Vector2f ( 1.0, 1.0);
-	p[6] = Vector2f ( 1.0, 0.0);
-	p[7] = Vector2f ( 0.0, 0.0);
+	p[4] = Vector2f ( 1.0, 1.0);
+	p[5] = Vector2f ( 1.0, 0.0);
+	p[6] = Vector2f ( 0.0, 0.0);
+	p[7] = Vector2f ( 0.0, 1.0);
 
 }
 

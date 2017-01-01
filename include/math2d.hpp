@@ -26,6 +26,10 @@ public:
 	Vector2f & operator+= (const Vector2f &op) {
 		this->x+=op.x; this->y+=op.y; return *this;
 	}
+
+	Vector2f operator* (float op) const {
+		return Vector2f (this->x*op, this->y*op);
+	}
 };
 typedef Vector2f Point2f;
 

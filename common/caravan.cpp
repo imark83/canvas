@@ -4,24 +4,25 @@
 Caravan::Caravan (int caravan_model) {
 
 	// DESIGN VARIABLES
-	float length;
-	float width;
-	float axis_distance;	// distance from axis to estreme of spear
+	length = 4.2;
+	width = 2.2;
+	axis_distance = 2.15;	// distance from axis to estreme of spear
 							// not including spear
-	float spear_length;		// from front part
 
 	// STATUS VARIABLES
-	float angle;			// angle respect to car axis
+	angle = 0.0;			// angle respect to car axis
 
 	// points
-	p[0] = Vector2f (-0.5,-1.0);
-	p[1] = Vector2f ( 0.5,-1.0);
-	p[2] = Vector2f ( 0.5, 1.0);
-	p[3] = Vector2f (-0.5, 1.0);
+	p[0] = Vector2f (-1.0,-1.0);
+	p[1] = Vector2f ( 1.0,-1.0);
+	p[2] = Vector2f ( 1.0, 1.0);
+	p[3] = Vector2f (-1.0, 1.0);
 	p[4] = Vector2f ( 1.0, 1.0);
 	p[5] = Vector2f ( 1.0, 0.0);
 	p[6] = Vector2f ( 0.0, 0.0);
 	p[7] = Vector2f ( 0.0, 1.0);
+
+	setScale (width/2.0, length/2.0);
 
 }
 

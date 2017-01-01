@@ -3,10 +3,10 @@
 
 
 Car::Car (int model) {
-	p[0] = Vector2f (-0.5,-1.0);
-	p[1] = Vector2f ( 0.5,-1.0);
-	p[2] = Vector2f ( 0.5, 1.0);
-	p[3] = Vector2f (-0.5, 1.0);
+	p[0] = Vector2f (-1.0,-1.0);
+	p[1] = Vector2f ( 1.0,-1.0);
+	p[2] = Vector2f ( 1.0, 1.0);
+	p[3] = Vector2f (-1.0, 1.0);
 	p[4] = Vector2f ( 0.0, 1.0);
 	p[5] = Vector2f ( 1.0, 1.0);
 	p[6] = Vector2f ( 1.0, 0.0);
@@ -17,15 +17,18 @@ Car::Car (int model) {
 
 	switch (model) {
 		case DEFAULT:
+			length = 4.36;
+			width = 2.0;
 			brk_acc = -15.0;
 			max_acc = 2.5;
 			def_acc = 1.0;
 			max_speed = 30.0;
 			min_speed = -8.0;
 			def_speed = 3.0;
+			interaxis_length = 2.62;
+			setScale (width/2.0, length/2.0);
 			break;
 	}
-	interaxis_length = 1.8;
 	caravan = NULL;
 }
 
@@ -42,6 +45,8 @@ Car::Car (const Car &op) {
 	p[6] =op.p[6];
 	p[7] =op.p[7];
 
+	width = op.width;
+	length = op.length;
 	wheelPosition = op.wheelPosition;
 	speed = op.speed;
 	pedal = op.pedal;
@@ -67,10 +72,10 @@ void Car::attachCaravan (int caravan_model) {
 	// caravan->setProgram (program);
 }
 
-void Car::setScale (float sc) {
-	Object::setScale(sc);
-	interaxis_length *= sc;
-}
+// void Car::setScale (float sc) {
+// 	Object::setScale(sc);
+// 	interaxis_length *= sc;
+// }
 
 void Car::initBuffers () {
 	glUseProgram (getProgram());
@@ -128,10 +133,30 @@ void Car::render (Camera cam) const {
 	while (clone.position.y < cam.y0)
 		clone.position.y += cam.getHeight();
 
+
 	Mat trans = cam.getModel() * clone.getModel();
 	glUniformMatrix4fv (glGetUniformLocation(program, "model"), 1, GL_FALSE, trans.data);
 
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+
+	// RENDERIZAR CARAVANA
+	if (caravan != NULL) {
+		caravan->setRot (clone.rotation + caravan->angle);
+
+		Vector2f caravanDirection (sin(M_PI*rotation/180.0), -cos(M_PI*rotation/180.0));
+
+		// std::cout << "caravanDirection = " << caravanDirection.x << ", " << caravanDirection.y << '\n';
+
+		Vector2f caravanPosition(clone.position);
+		caravanPosition += caravanDirection * (length/2.0f);
+		caravanDirection = Vector2f (sin(M_PI*caravan->rotation/180.0),
+						-cos(M_PI*caravan->rotation/180.0));
+		caravanPosition += caravanDirection * (caravan->axis_distance);
+
+
+		caravan->setPosition(caravanPosition);
+		caravan->render(cam);
+	}
 
 }
 
@@ -207,6 +232,12 @@ void Car::motionStep (int millis) {
 			break;
 		case -1: wheelStep(-2.0);
 			break;
+	}
+
+	// IF CARAVAN, UPDATE ANGLE
+	if (caravan != NULL) {
+		caravan->angle += speed*
+				sin(M_PI*caravan->angle/(180.0*caravan->axis_distance));
 	}
 
 	// MOVE THE CAR

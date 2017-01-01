@@ -14,6 +14,8 @@ public:
 
 	// GEOMETRIA DEL COCHE
 	float interaxis_length;
+	float length;
+	float width;
 
 	Vector2f p[8];
 
@@ -44,7 +46,7 @@ public:
 	Car (int = 0);
 	Car (const Car &op);
 	~Car();
-	void setScale (float sc);
+	// void setScale (float sc);
 
 
 	// ATTACH Caravan

@@ -16,7 +16,6 @@ public:
 	float width;
 	float axis_distance;	// distance from axis to estreme of spear
 							// not including spear
-	float spear_length;		// from front part
 
 	// STATUS VARIABLES
 	float angle;			// angle respect to car axis

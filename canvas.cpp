@@ -18,9 +18,7 @@ void renderFunction () {
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable (GL_DEPTH_TEST);
 
-	// car.render (cam);
-
-	car.caravan->render(cam);
+	car.render (cam);
 	glFlush ();
 }
 
@@ -55,17 +53,13 @@ void init () {
 
 
 	car.initBuffers ();
-	car.setScale (2.19);
 	car.move(10, 10);
 	car.setRot (-90);
-
 
 	car.attachCaravan();
 	car.caravan->setProgram(car.getProgram());
 	car.caravan->initBuffers ();
-	car.caravan->setScale (2.19);
-	car.caravan->move (5,5);
-
+	// car.caravan->angle = 30;
 
 
 	// car.speed=1;
@@ -158,7 +152,7 @@ int main(int argc, char *argv[]) {
 	// Must be done after glut is initialized!
 	// glewExperimental = GL_TRUE;
 	glewInit();
-	glutIdleFunc (renderFunction);
+	// glutIdleFunc (renderFunction);
 	glutReshapeFunc(reshapeFunction);
 	glutDisplayFunc(renderFunction);
 	glutKeyboardFunc(keyboardFunction);
@@ -166,7 +160,7 @@ int main(int argc, char *argv[]) {
 	glutSpecialFunc(specKeyboardFunction);
 	glutSpecialUpFunc(specKeyboardUpFunction);
 	glutIgnoreKeyRepeat(1);
-	// glutTimerFunc(33, timerFunction, 0);
+	glutTimerFunc(33, timerFunction, 0);
 
 
 	init ();

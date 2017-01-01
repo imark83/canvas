@@ -59,7 +59,7 @@ void init () {
 	car.attachCaravan();
 	car.caravan->setProgram(car.getProgram());
 	car.caravan->initBuffers ();
-	// car.caravan->angle = 30;
+	car.caravan->angle = 30;
 
 
 	// car.speed=1;

@@ -151,7 +151,7 @@ void Car::render (Camera cam) const {
 		caravanPosition += caravanDirection * (length/2.0f);
 		caravanDirection = Vector2f (sin(M_PI*caravan->rotation/180.0),
 						-cos(M_PI*caravan->rotation/180.0));
-		caravanPosition += caravanDirection * (caravan->axis_distance);
+		caravanPosition += caravanDirection * (caravan->length/2);
 
 
 		caravan->setPosition(caravanPosition);
@@ -234,11 +234,7 @@ void Car::motionStep (int millis) {
 			break;
 	}
 
-	// IF CARAVAN, UPDATE ANGLE
-	if (caravan != NULL) {
-		caravan->angle += speed*
-				sin(M_PI*caravan->angle/(180.0*caravan->axis_distance));
-	}
+
 
 	// MOVE THE CAR
 
@@ -258,10 +254,34 @@ void Car::motionStep (int millis) {
 		deltaX.y = Rc * ((cos(deltaTheta)-1.0)*sin(aux) + sin(deltaTheta)*cos(aux));
 		move (deltaX);
 		rotate (360.0*deltaTheta/(2.0*M_PI));
+
+		// IF CARAVAN, UPDATE ANGLE
+		if (caravan != NULL) {
+			float deltaX = speed * millis / 1000.0;
+			float deltaTheta = 180.0*sin(2.0*M_PI*wheelPosition/360.0)*
+					deltaX/(M_PI*interaxis_length);
+			std::cout << "angle = " << caravan->angle << '\n';
+			caravan->angle += -180.0*deltaX*
+					sin(M_PI*caravan->angle/180.0)/(M_PI*caravan->axis_distance)
+					- deltaTheta;
+		}
+
 	} else {
 		float deltaX = speed * deltaT;
 		move (-sin(2.0*M_PI*rotation/360.0)*deltaX,
 		 		cos(2.0*M_PI*rotation/360.0)*deltaX);
+
+		// IF CARAVAN, UPDATE ANGLE
+		if (caravan != NULL) {
+			float deltaX = speed * millis / 1000.0;
+			float deltaTheta = 180.0*sin(2.0*M_PI*wheelPosition/360.0)*
+					deltaX/(M_PI*interaxis_length);
+			std::cout << "angle = " << caravan->angle << '\n';
+			caravan->angle += -180.0*deltaX*
+					sin(M_PI*caravan->angle/180.0)/(M_PI*caravan->axis_distance)
+					- deltaTheta;
+		}
 	}
+
 
 }

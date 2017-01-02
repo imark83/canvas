@@ -3,11 +3,10 @@
 
 #include <GL/glew.h>
 #include <math2d.hpp>
-#include <renderable.hpp>
 #include <matrix.hpp>
 
 
-class Object : public Renderable {
+class Object {
 public:
 	Vector2f scale;
 	Vector2f position;
@@ -15,7 +14,7 @@ public:
 
 
 	Object ()
-		: scale (1.0, 1.0), position (0.0, 0.0), rotation (0.0), Renderable() {}
+		: scale (1.0, 1.0), position (0.0, 0.0), rotation (0.0) {}
 	// Object (Vector2f _scale, Vector2f _position, float _rotation);
 	// ~Object () {}
 

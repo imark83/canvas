@@ -6,7 +6,7 @@ Caravan::Caravan (int caravan_model) {
 	// DESIGN VARIABLES
 	length = 5.2;
 	width = 2.2;
-	axis_distance = 3.15;	// distance from axis to estreme of spear
+	axis_distance = 3.95;	// distance from axis to estreme of spear
 							// not including spear
 
 	// STATUS VARIABLES

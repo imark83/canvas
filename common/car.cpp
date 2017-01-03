@@ -167,8 +167,8 @@ void Car::render (Camera cam) const {
 // CAMBIAR CONTROL DE COCHE
 void Car::wheelStep (float angle) {
 	wheelPosition += angle;
-	if (wheelPosition > 45) wheelPosition = 45;
-	if (wheelPosition < -45) wheelPosition = -45;
+	if (wheelPosition > 40) wheelPosition = 40;
+	if (wheelPosition < -40) wheelPosition = -40;
 }
 
 

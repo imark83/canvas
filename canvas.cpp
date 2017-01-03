@@ -10,7 +10,7 @@
 
 
 Vector2f windowSize (1024, 512);
-Vector2f canvasSize (40, 20);
+Vector2f canvasSize (30, 15);
 Car car;
 Camera cam(canvasSize.x, canvasSize.y);
 
@@ -59,8 +59,8 @@ void init () {
 	car.attachCaravan();
 	car.caravan->setProgram(car.getProgram());
 	car.caravan->initBuffers ();
-	car.caravan->angle = 90;
-	car.wheelPosition = 00;
+	// car.caravan->angle = 90;
+	// car.wheelPosition = 00;
 
 
 	// car.speed=1;

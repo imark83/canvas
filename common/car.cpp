@@ -18,6 +18,7 @@ Car::Car (int model) {
 	switch (model) {
 		case DEFAULT:
 			length = 4.36;
+			// length = 4.0;
 			width = 2.0;
 			brk_acc = -15.0;
 			max_acc = 2.5;
@@ -26,6 +27,7 @@ Car::Car (int model) {
 			min_speed = -8.0;
 			def_speed = 1.0;
 			interaxis_length = 2.62;
+			// interaxis_length = 4.0;
 			setScale (width/2.0, length/2.0);
 			break;
 	}
@@ -165,8 +167,8 @@ void Car::render (Camera cam) const {
 // CAMBIAR CONTROL DE COCHE
 void Car::wheelStep (float angle) {
 	wheelPosition += angle;
-	if (wheelPosition > 50) wheelPosition = 50;
-	if (wheelPosition < -50) wheelPosition = -50;
+	if (wheelPosition > 45) wheelPosition = 45;
+	if (wheelPosition < -45) wheelPosition = -45;
 }
 
 
@@ -240,30 +242,58 @@ void Car::motionStep (int millis) {
 
 	if (wheelPosition != 0.0) {
 		Vector2f deltaX;
-		float deltaTheta =
-		 		sin(2.0*M_PI*wheelPosition/360.0)*
-				speed*millis/(1000.0*interaxis_length);
 
-		float beta = atan (tan(2.0*M_PI*wheelPosition/360.0)/2.0);
 
+		float beta = atan (tan(M_PI*wheelPosition/180.0)/2.0);
+		// std::cout << "beta = " << beta << '\n';
+
+		float Rf = interaxis_length / sin(M_PI*wheelPosition/180.0);
+		// std::cout << "Rf = " << Rf << '\n';
 		float Rc = interaxis_length / (2.0 * sin(beta));
+		// std::cout << "Rc = " << Rc << '\n';
 
-		float aux = 2.0*M_PI*rotation/360.0 + beta;
+		float omega_car = speed / Rf;
+		float deltaTheta = (omega_car*millis)/1000.0;
 
-		deltaX.x = Rc * ((cos(deltaTheta)-1.0)*cos(aux) - sin(deltaTheta)*sin(aux));
-		deltaX.y = Rc * ((cos(deltaTheta)-1.0)*sin(aux) + sin(deltaTheta)*cos(aux));
+
+
+		float aux = M_PI*rotation/180.0 + beta;
+
+		deltaX.x = Rc * ((cos(deltaTheta)-1.0)*cos(aux) -
+		 			sin(deltaTheta)*sin(aux));
+		deltaX.y = Rc * ((cos(deltaTheta)-1.0)*sin(aux) +
+		 			sin(deltaTheta)*cos(aux));
+
 		move (deltaX);
-		rotate (360.0*deltaTheta/(2.0*M_PI));
+		rotate (180.0*deltaTheta/M_PI);
 
 		// IF CARAVAN, UPDATE ANGLE
 		if (caravan != NULL) {
-			float deltaX = speed * millis / 1000.0;
-			float deltaTheta = 180.0*sin(2.0*M_PI*wheelPosition/360.0)*
-					deltaX/(M_PI*interaxis_length);
-			std::cout << "angle = " << caravan->angle << '\n';
-			caravan->angle += -180.0*deltaX*
-					sin(M_PI*caravan->angle/180.0)/(M_PI*caravan->axis_distance)
-					- deltaTheta;
+			// RADIO DE LA RUEDA TRASERA
+			// std::cout << "beta ahora = " << 180.0*beta/M_PI << '\n';
+			float Rr = interaxis_length / tan (M_PI*wheelPosition/180.0);
+			// std::cout << "Rr = " << Rr << '\n';
+
+			// ANGULO DE DESVIACIÓN POR VOLANDA
+			float delta = atan ((length-interaxis_length)/(2.0*Rr));
+			// std::cout << "delta = " << delta << '\n';
+
+			// RADIO DE GIRO DE LA PARTE TRASERA DEL COCHE
+			float Rb = Rr / cos (delta);
+			// std::cout << "Rb = " << Rb << '\n';
+			// VELOCIDAD EFECTIVA DE LA BOLA
+			float v_b = omega_car * Rb;
+
+
+			// ANGULO EFECTIVO DE LA VELOCIDAD DEL COCHE SOBRE CARAVANA
+			float lambda = (M_PI*(caravan->angle)/180.0) + delta;
+
+			float omega_caravan = v_b * sin (lambda) / caravan->axis;
+
+
+			float deltaTheta_caravan = omega_caravan*millis/1000.0;
+
+			caravan->angle += -180*(deltaTheta_caravan + deltaTheta)/M_PI;
 		}
 
 	} else {
@@ -274,11 +304,11 @@ void Car::motionStep (int millis) {
 		// IF CARAVAN, UPDATE ANGLE
 		if (caravan != NULL) {
 			float deltaX = speed * millis / 1000.0;
-			float deltaTheta = 180.0*sin(2.0*M_PI*wheelPosition/360.0)*
+			float deltaTheta = 180.0*sin(M_PI*wheelPosition/180.0)*
 					deltaX/(M_PI*interaxis_length);
 			std::cout << "angle = " << caravan->angle << '\n';
 			caravan->angle += -180.0*deltaX*
-					sin(M_PI*caravan->angle/180.0)/(M_PI*caravan->axis_distance)
+					sin(M_PI*caravan->angle/180.0)/(M_PI*caravan->axis)
 					- deltaTheta;
 		}
 	}

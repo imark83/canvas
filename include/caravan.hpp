@@ -15,7 +15,7 @@ public:
 	// DESIGN VARIABLES
 	float length;
 	float width;
-	float axis_distance;	// distance from axis to estreme of spear
+	float axis;	// distance from axis to estreme of spear
 							// not including spear
 
 	// STATUS VARIABLES

@@ -59,7 +59,8 @@ void init () {
 	car.attachCaravan();
 	car.caravan->setProgram(car.getProgram());
 	car.caravan->initBuffers ();
-	car.caravan->angle = 30;
+	car.caravan->angle = 90;
+	car.wheelPosition = 00;
 
 
 	// car.speed=1;
@@ -143,7 +144,7 @@ int main(int argc, char *argv[]) {
 	// init display con DEPTH Y RGBA
 	glutInitDisplayMode (GLUT_RGBA | GLUT_DEPTH);
 	glutInitWindowSize(windowSize.x, windowSize.y);
-	glutInitWindowPosition(100, 100);
+	glutInitWindowPosition(500, 100);
 
 
 

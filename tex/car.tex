@@ -4,6 +4,7 @@
 
 \usepackage[margin=2cm]{geometry}
 \usepackage{amsmath}
+\usepackage{multicol}
 
 \pagestyle{empty}
 
@@ -14,15 +15,74 @@
 
 
 \begin{document}
-\setlength\unitlength{3cm}
+
+\def\aalpha{20}
+\def\pphi{30}
+% \newcommand\vv[1]{\overrightarrow{#1}}
+
 \subsection*{Notation}
+\begin{multicols}{2}
+
+\setlength\unitlength{2cm}
 	\begin{center}\begin{tikzpicture}[x=1\unitlength,y=1\unitlength]
-		\node[opacity=0.2, draw=black, inner sep=0mm] (CAR) {\includegraphics
+		\node[opacity=0.4, inner sep=0mm] (CAR) {\includegraphics
 					[width=1\unitlength,height=2\unitlength]{../car2.png}};
 
-		\draw[thick, -to] ($(CAR.south) +(0,-2mm)$) -- ($(CAR.north) +(0,2mm)$);
-		\draw[thick, -to] ($(CAR.west) + (-2mm,0)$) -- ($(CAR.east) + (2mm,0)$);
+		\draw[opacity = 0.3, thick, -to] ($(CAR.south) +(0,-2mm)$) -- ($(CAR.north) +(0,2mm)$);
+		\draw[opacity = 0.3, thick, -to] ($(CAR.west) + (-2mm,0)$) -- ($(CAR.east) + (2mm,0)$);
+
+		% INTERAXIS LENGTH
+		\draw[thick, dashed] ($(CAR.north east) + (-0.13,-0.4\unitlength)$) -- +(0.4,0) coordinate (IAL1);
+		\draw[thick, dashed] ($(CAR.south east) + (-0.13,0.4\unitlength)$) -- +(0.4,0) coordinate (IAL2);
+		\draw[thick, to-to] ($(IAL1.center) - (2mm,0)$) --
+			node[right] {\small $D$}
+			($(IAL2.center) - (2mm,0)$);
+
+		% CAR LENGTH
+		\draw[thick, dashed] ($(CAR.north east) + (-0.5,-0.03\unitlength)$) -- +(1,0) coordinate (L1);
+		\draw[thick, dashed] ($(CAR.south east) + (-0.5,0.03\unitlength)$) -- +(1,0) coordinate (L2);
+		\draw[thick, to-to] ($(L1.center) - (2mm,0)$) --
+			node[right] {\small $L$}
+			($(L2.center) - (2mm,0)$);
+
+		% CAR WIDTH
+		\draw[thick, dashed] ($(CAR.west) + (+0.09\unitlength, 0)$) -- +(0, -1.2) coordinate (W1);
+		\draw[thick, dashed] ($(CAR.east) + (-0.13\unitlength, 0)$) -- +(0, -1.2) coordinate (W2);
+		\draw[thick, to-to] ($(W1.center) + (0,2mm)$) --
+			node[below] {\small $W$}
+			($(W2.center) + (0,2mm)$);
+
+		\begin{scope}[shift={(2.5,0)}]
+			\draw[thick] (0,-1.2) -- (0,1.4);
+			\draw[thick, -to] (0,0.5) arc (90:90+\aalpha:0.5)  node[midway, above] {\small $\alpha$};
+			\begin{scope}[rotate=\aalpha]
+				\node[rotate=\aalpha, opacity=0.4, inner sep=0mm] (CAR) {\includegraphics
+							[width=1\unitlength,height=2\unitlength]{../car2.png}};
+				\draw[thick, -to] ($(CAR.south) +(0,-2mm)$) -- ($(CAR.north) +(0,6mm)$);
+				% WHEELS
+				\begin{scope}[shift={($(CAR.north west) + (0.11,-0.4\unitlength)$)}]
+					\draw[rotate=\pphi, very thick] (0,-0.07) -- (0,0.07);
+					\draw[rotate=\pphi] (0,0) -- (0,0.4);
+					\draw[] (0,-0.4) -- (0,0.4);
+					\draw[thick, -to] (0,0.2) arc (90:90+\pphi:0.2) node[midway,above left=-1mm] {\small $\varphi$};
+				\end{scope}
+
+			\end{scope}
+		\end{scope}
 
 	\end{tikzpicture}\end{center}
+\begin{itemize}
+	\item $L$: Car Length.
+	\item $W$: Car Width
+	\item $D$: Interaxis Length.
+	\item $\alpha$: Rotation angle.
+	\item $\varphi$: Steering wheel angle.
+	\item $\Delta t$: Elapsed time.
+	\item $v$: Car velocity. Measured as average of front wheel velocities.
+	\item $\mathbf{x}$: Position of the car;
+\end{itemize}
+\end{multicols}
+
+Consider \textbf{counterclockwise} angles to be positives..
 
 \end{document}

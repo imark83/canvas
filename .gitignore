@@ -32,3 +32,8 @@ aaa
 # Useless images
 car.jpg
 homer.png
+
+#LATEX
+*.aux
+*.log
+car.pdf

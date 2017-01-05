@@ -5,6 +5,9 @@
 \usepackage[margin=2cm]{geometry}
 \usepackage{amsmath}
 \usepackage{multicol}
+\usepackage[rflt]{floatflt}
+
+
 
 \pagestyle{empty}
 
@@ -21,10 +24,13 @@
 % \newcommand\vv[1]{\overrightarrow{#1}}
 
 \subsection*{Notation}
-\begin{multicols}{2}
+Along this project, consider \textbf{counterclockwise} angles to be positives. Besides, the rendered car will use Front Wheel Drive (from now FWD).
 
-\setlength\unitlength{2cm}
-	\begin{center}\begin{tikzpicture}[x=1\unitlength,y=1\unitlength]
+% \begin{multicols}{2}
+
+	\begin{floatingfigure}{0.55\textwidth}
+		\setlength\unitlength{2cm}
+	\begin{tikzpicture}[x=1\unitlength,y=1\unitlength]
 		\node[opacity=0.4, inner sep=0mm] (CAR) {\includegraphics
 					[width=1\unitlength,height=2\unitlength]{../car2.png}};
 
@@ -67,26 +73,36 @@
 					\draw[thick, -to] (0,0.2) arc (90:90+\pphi:0.2) node[midway,above left=-1mm] {\small $\varphi$};
 				\end{scope}
 
+
+			\end{scope}
+			\begin{scope}[shift={(-0.8,-0.6)}]
+				\draw (-0.3,0) -- ++(0.6,0);
+				\draw (0,-0.3) -- ++(0,0.6);
+				\node[below right]{\small $(0,0)$};
+				\draw[thick, -to] (0,0) -- node[left] {\small $\mathbf{x}$} (CAR2.center);
 			\end{scope}
 		\end{scope}
 
-	\end{tikzpicture}\end{center}
-\begin{itemize}
-	\item $L$: Car Length.
-	\item $W$: Car Width
-	\item $D$: Interaxis Length.
-	\item $\alpha$: Rotation angle.
-	\item $\varphi$: Steering wheel angle.
-	\item $\Delta t$: Elapsed time.
-	\item $v$: Car velocity. Measured as average of front wheel velocities.
-	\item $\mathbf{x}$: Position of the car;
-\end{itemize}
-\end{multicols}
+	\end{tikzpicture}
+	\end{floatingfigure}
+	~
+	\begin{itemize}
+  	\setlength\itemsep{-1em}
+		\fltitem{$L$: Car Length.}
+		\fltitem{$W$: Car Width.}
+		\fltitem{$D$: Interaxis Length.}
+		\fltitem{$\alpha$: Car orientation.}
+		\fltitem{$\varphi$: Steering wheel angle.}
+		\fltitem{$\Delta t$: Elapsed time.}
+		\fltitem{$\mathbf{x}$: Position of the car.}
+		\fltitem{$\Delta \theta$: Increment on car orientation.}
+		\fltitem{$\Delta \mathbf{x}$: Increment on car position.}
+		\fltitem{$v$: Car velocity. Measured as average of front wheel velocities.}
+	\end{itemize}
 
 
 \def\pphi{-30}
 \def\aalpha{10}
-Consider \textbf{counterclockwise} angles to be positives.
 \setlength\unitlength{2cm}
 	\begin{center}\begin{tikzpicture}[x=1\unitlength,y=1\unitlength]
 		\node[rotate=\aalpha, opacity=0.4, inner sep=0]
@@ -97,6 +113,10 @@ Consider \textbf{counterclockwise} angles to be positives.
 
 		\draw (REAR) -- +(2\unitlength,0);
 
+		% ROTATION ANGLE
+		\begin{scope}[shift={(REAR)}]
+			\draw[thick, -to] (0.7,0) arc (0:\aalpha:0.7) node[midway, right] {\small $\alpha$};
+		\end{scope}
 
 		\begin{scope}[rotate=\aalpha]
 			\draw[thick] ($(CAR.south) + (0,-.05\unitlength)$)
@@ -117,10 +137,12 @@ Consider \textbf{counterclockwise} angles to be positives.
 			\draw[thick] (FRONT) -- node[above] {\small $R_F$} (O);
 			\draw[thick] (CAR.center) -- node[above] {\small $R_C$} (O);
 			\draw[thick] (REAR) -- node[above=1mm, left=2mm]{\small $R_R$} (O);
+			\draw[thick] (CAR.south) -- node[below] {\small $R_T$} (O);
 
 
 		\end{scope}
 
 	\end{tikzpicture}\end{center}
-adf
+
+
 \end{document}

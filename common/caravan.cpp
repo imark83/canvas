@@ -77,6 +77,8 @@ void Caravan::render (Camera cam) const {
 
 	Mat trans = cam.getModel() * getModel();
 	glUniformMatrix4fv (glGetUniformLocation(program, "model"), 1, GL_FALSE, trans.data);
+	glUniform1f (glGetUniformLocation(program, "depth"), 0.5);
+
 
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 }

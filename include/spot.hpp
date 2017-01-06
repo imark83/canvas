@@ -11,7 +11,7 @@ public:
 	float width;
 	float length;
 
-	Spot (float = 3.0, float = 6.0);
+	Spot (float = 4.0, float = 6.5);
 
 	virtual void initBuffers ();
 	virtual void render (Camera) const;

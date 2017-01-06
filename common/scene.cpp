@@ -6,7 +6,13 @@ void Scene::init () {
 	glEnable (GL_BLEND);
 	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	glClearColor (26.0/256.0, 102.0/256.0, 46.0/256.0, 0.0f);
+	// glAlphaFunc(GL_GREATER, 0.5);
+	// glEnable(GL_ALPHA_TEST);
+
+	glEnable(GL_DEPTH_TEST);
+
+	// glClearColor (26.0/256.0, 102.0/256.0, 46.0/256.0, 0.0f);
+	glClearColor (0.0f, 0.0f, 0.0f, 0.0f);
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
@@ -18,35 +24,27 @@ void Scene::init () {
 	car.setProgram (loadShaders (shaders));
 
 
-	ShaderInfo shaders2[] = {
-		{GL_VERTEX_SHADER, "floor.vs.glsl"},
-		{GL_FRAGMENT_SHADER, "floor.fs.glsl"},
-		{GL_NONE, NULL}};
-
-
-
 
 
 	glUseProgram (car.getProgram ());
 
 
 	car.initBuffers ();
-	car.move(10, 10);
+	car.move(15, 7.5);
 	car.setRot (-90);
 
 	car.attachCaravan();
 	car.caravan->setProgram(car.getProgram());
 	car.caravan->initBuffers ();
 
-	spot.setProgram (loadShaders (shaders2));
+	spot.setProgram (car.getProgram());
 	spot.initBuffers ();
 	spot.setPosition (20,10);
 }
 
 void Scene::render () {
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable (GL_DEPTH_TEST | GL_BLEND);
-	// glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 
 	glUseProgram (car.getProgram());
 	car.render (cam);

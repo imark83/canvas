@@ -138,6 +138,7 @@ void Car::render (Camera cam) const {
 
 	Mat trans = cam.getModel() * clone.getModel();
 	glUniformMatrix4fv (glGetUniformLocation(program, "model"), 1, GL_FALSE, trans.data);
+	glUniform1f (glGetUniformLocation(program, "depth"), 0.0);
 
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 

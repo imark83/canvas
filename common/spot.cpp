@@ -54,6 +54,9 @@ void Spot::initBuffers () {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
 		SOIL_free_image_data(image);
 
 		setVao (vao); setBuffer (buffer); setTexture (texture);
@@ -67,6 +70,8 @@ void Spot::render (Camera cam) const {
 
 	Mat trans = cam.getModel() * getModel();
 		glUniformMatrix4fv (glGetUniformLocation(program, "model"), 1, GL_FALSE, trans.data);
+
+	glUniform1f (glGetUniformLocation(program, "depth"), 0.99);
 
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 }

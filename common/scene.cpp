@@ -15,6 +15,17 @@ void Scene::init () {
 		{GL_NONE, NULL}};
 
 	car.setProgram (loadShaders (shaders));
+
+
+	ShaderInfo shaders2[] = {
+		{GL_VERTEX_SHADER, "floor.vs.glsl"},
+		{GL_FRAGMENT_SHADER, "floor.fs.glsl"},
+		{GL_NONE, NULL}};
+
+
+
+
+
 	glUseProgram (car.getProgram ());
 
 
@@ -26,7 +37,7 @@ void Scene::init () {
 	car.caravan->setProgram(car.getProgram());
 	car.caravan->initBuffers ();
 
-	spot.setProgram (car.getProgram());
+	spot.setProgram (loadShaders (shaders2));
 	spot.initBuffers ();
 	spot.setPosition (20,10);
 }
@@ -34,6 +45,8 @@ void Scene::init () {
 void Scene::render () {
 	glUseProgram (car.getProgram());
 	car.render (cam);
+
+	glUseProgram (spot.getProgram());
 	spot.render(cam);
 
 }

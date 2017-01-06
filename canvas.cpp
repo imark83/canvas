@@ -13,8 +13,8 @@ Vector2f canvasSize (30, 15);
 Scene scene;
 
 void renderFunction () {
-	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable (GL_DEPTH_TEST);
+	// glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	// glEnable (GL_DEPTH_TEST | GL_BLEND);
 
 	scene.render ();
 	glFlush ();

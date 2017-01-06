@@ -5,9 +5,10 @@
 void Scene::init () {
 	glEnable (GL_BLEND);
 	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	// glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
 	glClearColor (26.0/256.0, 102.0/256.0, 46.0/256.0, 0.0f);
-	// glClearColor(0.12500f, 0.57812f, 0.11719f, 1.0f);
+	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 
 	ShaderInfo shaders[] = {
 		{GL_VERTEX_SHADER, "default.vs.glsl"},
@@ -43,6 +44,10 @@ void Scene::init () {
 }
 
 void Scene::render () {
+	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable (GL_DEPTH_TEST | GL_BLEND);
+	// glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	glUseProgram (car.getProgram());
 	car.render (cam);
 

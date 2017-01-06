@@ -5,8 +5,9 @@
 
 #include <object.hpp>
 #include <car.hpp>
+#include <spot.hpp>
 #include <camera.hpp>
-#include <list>
+#include <vector>
 
 
 extern Vector2f windowSize;
@@ -16,7 +17,7 @@ class Scene {
 public:
 	Car car;
 	Camera cam;
-	std::list<Object> objects;
+	Spot spot;
 
 	Scene () : car(), cam(canvasSize.x, canvasSize.y) {}
 

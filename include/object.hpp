@@ -4,9 +4,10 @@
 #include <GL/glew.h>
 #include <math2d.hpp>
 #include <matrix.hpp>
+#include <renderable.hpp>
 
 
-class Object {
+class Object : public Renderable {
 public:
 	Vector2f scale;
 	Vector2f position;
@@ -46,6 +47,10 @@ public:
 					rotMatrix(rotation) *
 					scaleMatrix (scale.x, scale.y) * rop;
 	}
+
+
+	virtual void initBuffers () {};
+	virtual void render (Camera) const {};
 
 };
 

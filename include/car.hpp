@@ -4,14 +4,13 @@
 
 #include <math2d.hpp>
 #include <object.hpp>
-#include <renderable.hpp>
 
 #include <caravan.hpp>
 
 
 enum model_t {DEFAULT, ROVER};
 
-class Car : public Object, public Renderable {
+class Car : public Object {
 public:
 
 	// GEOMETRIA DEL COCHE

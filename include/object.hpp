@@ -49,7 +49,7 @@ public:
 	}
 
 
-	virtual void initBuffers () {};
+	
 	virtual void render (Camera) const {};
 
 };

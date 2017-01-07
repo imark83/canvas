@@ -12,9 +12,8 @@ public:
 	float length;
 
 	Spot (float = 4.0, float = 6.5);
-
-	virtual void initBuffers ();
-	virtual void render (Camera) const;
+	
+	void render (Camera) const;
 
 
 };

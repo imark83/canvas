@@ -67,7 +67,7 @@ public:
 	// ACTUALIZAR POSICION DE COCHE DE ACUERDO CON EL CONTROL
 	void motionStep (int millis);
 
-	void initBuffers ();
+	// void initBuffers ();
 	void render (Camera) const;
 };
 #endif

@@ -24,7 +24,6 @@ public:
 
 
 	// INHERITED METHODS
-	void initBuffers ();
 	void render (Camera) const;
 
 };

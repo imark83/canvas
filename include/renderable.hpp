@@ -3,19 +3,21 @@
 
 #include <GL/glew.h>
 #include <camera.hpp>
+#include <SOIL/SOIL.h>
+#include <math2d.hpp>
 
 class Renderable {
 
 public:
 	GLuint vao;
 	GLuint buffer;
-	GLuint colorBuffer;
+	// GLuint colorBuffer;
 	GLuint program;
 	GLuint texture;
 
 	~Renderable () {}
 
-	virtual void initBuffers () = 0;
+	virtual void initBuffers (Vector2f p[8], const char* textureFile);
 	virtual void render (Camera) const = 0;
 
 	void setVao (const GLuint vao) {
@@ -39,12 +41,6 @@ public:
 		return texture;
 	}
 
-	void setColorBuffer (const GLuint colorBuffer) {
-		this->colorBuffer = colorBuffer;
-	}
-	GLuint getColorBuffer () const {
-		return colorBuffer;
-	}
 
 	void setProgram (const GLuint program) {
 		this->program = program;

@@ -29,16 +29,16 @@ void Scene::init () {
 	glUseProgram (car.getProgram ());
 
 
-	car.initBuffers ();
+	car.initBuffers (car.p, "car2.png");
 	car.move(15, 7.5);
 	car.setRot (-90);
 
 	car.attachCaravan();
 	car.caravan->setProgram(car.getProgram());
-	car.caravan->initBuffers ();
+	car.caravan->initBuffers (car.caravan->p, "caravan.png");
 
 	spot.setProgram (car.getProgram());
-	spot.initBuffers ();
+	spot.initBuffers (spot.p, "parking.jpg");
 	spot.setPosition (20,10);
 }
 

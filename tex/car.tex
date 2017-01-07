@@ -135,9 +135,18 @@ Along this project, consider \textbf{counterclockwise} angles to be positives. B
 			\path[name intersections={of=rearpath and frontpath, by=O}];
 			\node[right] at (O) {\small $O$};
 			\draw[thick] (FRONT) -- node[above] {\small $R_F$} (O);
-			\draw[thick] (CAR.center) -- node[above] {\small $R_C$} (O);
 			\draw[thick] (REAR) -- node[above=1mm, left=2mm]{\small $R_R$} (O);
 			\draw[thick] (CAR.south) -- node[below] {\small $R_T$} (O);
+			\draw[thick, name path = centerpath] (CAR.center) -- node[above] {\small $R_C$} (O);
+
+			% PHI and BETA ANGLES
+			\begin{scope}[shift = {(O)}]
+				\draw[thick,-to] (-0.8,0) arc (180:{180+atan(tan(\pphi)/2)}:0.8) node[midway,left] {\small$\beta$};
+
+				\draw[thick,-to] (-0.4,0) arc (180:{180+\pphi}:0.4) node[midway,left=0.5mm,fill=white,inner sep=0] {\small$\varphi$};
+
+			\end{scope}
+
 
 
 		\end{scope}

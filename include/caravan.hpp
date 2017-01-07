@@ -7,8 +7,6 @@
 
 class Caravan : public Object {
 public:
-	// DRAWING VARIABLES
-	Vector2f p[8];			// puntos
 
 
 	// DESIGN VARIABLES
@@ -22,9 +20,6 @@ public:
 
 	Caravan (int = 0);
 
-
-	// INHERITED METHODS
-	void render (Camera) const;
 
 };
 

@@ -47,10 +47,10 @@ void Scene::render () {
 
 
 	glUseProgram (car.getProgram());
-	car.render (cam);
+	car.render (cam, 0.0);
 
 	glUseProgram (spot.getProgram());
-	spot.render(cam);
+	spot.render(cam, 0.99);
 
 }
 

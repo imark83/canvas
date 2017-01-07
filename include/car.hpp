@@ -18,7 +18,6 @@ public:
 	float length;
 	float width;
 
-	Vector2f p[8];
 
 	// VARIABLES DE ESTADO DE CONTROL DE COCHE
 	float wheelPosition; // con respecto al eje del coche
@@ -68,6 +67,6 @@ public:
 	void motionStep (int millis);
 
 	// void initBuffers ();
-	void render (Camera) const;
+	void render (Camera cam, float depth) const;
 };
 #endif

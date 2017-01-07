@@ -7,13 +7,11 @@
 
 class Spot : public Object {
 public:
-	Vector2f p[8];
 	float width;
 	float length;
 
 	Spot (float = 4.0, float = 6.5);
-	
-	void render (Camera) const;
+
 
 
 };

@@ -25,19 +25,3 @@ Caravan::Caravan (int caravan_model) {
 	setScale (width/2.0, length/2.0);
 
 }
-
-
-void Caravan::render (Camera cam) const {
-	glBindVertexArray (getVao());
-	glBindBuffer (GL_ARRAY_BUFFER, getBuffer());
-	glBindTexture(GL_TEXTURE_2D, getTexture());
-
-
-
-	Mat trans = cam.getModel() * getModel();
-	glUniformMatrix4fv (glGetUniformLocation(program, "model"), 1, GL_FALSE, trans.data);
-	glUniform1f (glGetUniformLocation(program, "depth"), 0.5);
-
-
-	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-}

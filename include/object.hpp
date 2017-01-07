@@ -12,6 +12,8 @@ public:
 	Vector2f scale;
 	Vector2f position;
 	float rotation;
+	Vector2f p[8];
+
 
 
 	Object ()
@@ -49,8 +51,8 @@ public:
 	}
 
 
-	
-	virtual void render (Camera) const {};
+	void render (Camera) const {}
+	virtual void render (Camera cam, float depth) const;
 
 };
 

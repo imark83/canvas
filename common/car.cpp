@@ -82,7 +82,7 @@ void Car::attachCaravan (int caravan_model) {
 // void Car::initBuffers () {
 //
 // }
-void Car::render (Camera cam) const {
+void Car::render (Camera cam, float depth) const {
 	glBindVertexArray (getVao());
 	glBindBuffer (GL_ARRAY_BUFFER, getBuffer());
 	glBindTexture(GL_TEXTURE_2D, getTexture());
@@ -101,7 +101,7 @@ void Car::render (Camera cam) const {
 
 	Mat trans = cam.getModel() * clone.getModel();
 	glUniformMatrix4fv (glGetUniformLocation(program, "model"), 1, GL_FALSE, trans.data);
-	glUniform1f (glGetUniformLocation(program, "depth"), 0.0);
+	glUniform1f (glGetUniformLocation(program, "depth"), depth);
 
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
@@ -121,7 +121,7 @@ void Car::render (Camera cam) const {
 
 
 		caravan->setPosition(caravanPosition);
-		caravan->render(cam);
+		caravan->render(cam, 0.5f);
 	}
 
 }

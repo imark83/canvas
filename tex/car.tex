@@ -5,6 +5,7 @@
 \usepackage[margin=2cm]{geometry}
 \usepackage{amsmath}
 \usepackage{multicol}
+\usepackage{nicefrac}
 \usepackage[rflt]{floatflt}
 
 
@@ -76,8 +77,8 @@ Along this project, consider \textbf{counterclockwise} angles to be positives. B
 
 			\end{scope}
 			\begin{scope}[shift={(-0.8,-0.6)}]
-				\draw (-0.3,0) -- ++(0.6,0);
-				\draw (0,-0.3) -- ++(0,0.6);
+				\draw[-to] (-0.3,0) -- ++(0.6,0);
+				\draw[-to] (0,-0.3) -- ++(0,0.6);
 				\node[below right]{\small $(0,0)$};
 				\draw[thick, -to] (0,0) -- node[left] {\small $\mathbf{x}$} (CAR2.center);
 			\end{scope}
@@ -104,7 +105,8 @@ Along this project, consider \textbf{counterclockwise} angles to be positives. B
 \def\pphi{-30}
 \def\aalpha{10}
 \setlength\unitlength{2cm}
-	\begin{center}\begin{tikzpicture}[x=1\unitlength,y=1\unitlength]
+	\begin{floatingfigure}{0.4\textwidth}
+	\begin{tikzpicture}[x=1\unitlength,y=1\unitlength]
 		\node[rotate=\aalpha, opacity=0.4, inner sep=0]
 				(CAR) {\includegraphics [width=1.0\unitlength, height=2.0\unitlength]{../car2.png}};
 		 \coordinate (REAR) at ($(CAR.center)!0.65!(CAR.south)$);
@@ -116,6 +118,7 @@ Along this project, consider \textbf{counterclockwise} angles to be positives. B
 		% ROTATION ANGLE
 		\begin{scope}[shift={(REAR)}]
 			\draw[thick, -to] (0.7,0) arc (0:\aalpha:0.7) node[midway, right] {\small $\alpha$};
+			\draw[rotate=\aalpha] (0.1,0) -- ++(0,0.1) -- ++(-0.1,0);
 		\end{scope}
 
 		\begin{scope}[rotate=\aalpha]
@@ -151,7 +154,20 @@ Along this project, consider \textbf{counterclockwise} angles to be positives. B
 
 		\end{scope}
 
-	\end{tikzpicture}\end{center}
+	\end{tikzpicture}\end{floatingfigure}
+
+	Supose the car orientation to be $\alpha >0$ (according to picture) wheels angle to be $\varphi < 0$. The car turns around point $O$ with radius $R_F$ of front wheel axis, $R_C$ to the center of the car (the position of the car) and $R_R$ to the rear wheel axis.
+	\[
+		\boxed{R_F = \frac{D}{\sin(\phi)}}
+	\]
+	\[
+		\tan\beta = \frac{D}{2\,R_R},\quad tan\varphi = \frac{D}{R_R} \Longrightarrow
+		\boxed{\beta = \arctan\left(\frac{\tan\varphi}{2}\right)} \in [-\nicefrac\pi2,\nicefrac\pi 2]
+	\]
+	\[
+	\boxed{R_C = \frac{D}{2\sin\beta}}
+	\]
+
 
 
 \end{document}

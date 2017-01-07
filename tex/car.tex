@@ -24,7 +24,7 @@
 \def\pphi{30}
 % \newcommand\vv[1]{\overrightarrow{#1}}
 
-\subsection*{Notation}
+\section*{CAR MOVEMENT}
 Along this project, consider \textbf{counterclockwise} angles to be positives. Besides, the rendered car will use Front Wheel Drive (from now FWD).
 
 % \begin{multicols}{2}
@@ -112,6 +112,10 @@ Along this project, consider \textbf{counterclockwise} angles to be positives. B
 		 \coordinate (REAR) at ($(CAR.center)!0.65!(CAR.south)$);
 		 \coordinate (FRONT) at ($(CAR.center)!0.65!(CAR.north)$);
 
+		 \node[left] {\small $C$};
+		 \node[left] at (FRONT) {\small $F$};
+		 \node[left] at (REAR) {\small $R$};
+
 
 		\draw (REAR) -- +(2\unitlength,0);
 
@@ -150,8 +154,14 @@ Along this project, consider \textbf{counterclockwise} angles to be positives. B
 
 			\end{scope}
 
+			\draw[very thick, -to] (0,0) -- ($(0,0)!8mm!(O)$) coordinate (AA);
+				\node[above] at (AA) {\small $\vec{a}$};
 
 
+			\path (AA) arc ({atan(tan(\pphi)/2)}:90+atan(tan(\pphi)/2):8mm) coordinate (BB);
+
+			\draw[very thick, -to] (0,0) -- (BB);
+				\node[right] at (BB) {\small $\vec{b}$};
 		\end{scope}
 
 	\end{tikzpicture}\end{floatingfigure}
@@ -168,6 +178,57 @@ Along this project, consider \textbf{counterclockwise} angles to be positives. B
 	\boxed{R_C = \frac{D}{2\sin\beta}}
 	\]
 
+	$\vec{a}$ and $\vec{b}$ are the vectors of the canonical base rotated $\alpha + \beta$:
+	\[
+	\begin{split}
+		\vec{a} &= \cos (\alpha+\beta) \vec{\i} + \sin(\alpha+\beta) \vec{\j}\\
+		\vec{b} &= -\sin (\alpha+\beta) \vec{\i} + \cos(\alpha+\beta) \vec{\j}
+	\end{split}
+	\]
+
+	From velocity of front wheels we can compute the angular velocity and the increment $\Delta \theta$ on car rotation in $\Delta t$:
+	\[
+	\boxed{\omega = \frac{v}{R_F}} \Longrightarrow
+	\boxed{\Delta \theta = \frac{v\cdot\sin(\varphi)\cdot\Delta t}{D}}
+	\]
+
+
+	\setlength\unitlength{2cm}
+	\def\dt{40}
+	\begin{floatingfigure}{0.4\textwidth}
+		\begin{tikzpicture}[x=1\unitlength,y=1\unitlength]
+			\draw[very thick, -to] (0,0) -- (0.5,0) coordinate (AA);
+			\draw[very thick, -to] (0,0) -- (0,0.5) coordinate (BB);
+			\node[below left] {\small $C$};
+
+			\node[above] at (AA) {$\small \vec{a}$};
+			\node[left] at (BB) {$\small \vec{b}$};
+
+			\draw[thick] (0,0) arc (180:{180-\dt}:1.5);
+
+			\begin{scope}[shift={(1.5,0)}]
+				\node[below right] {\small $O$};
+				\draw (0,0) -- node[below] {\small $R_C$} (-1.5,0);
+				\draw (0,0) -- ({180-\dt}:1.5);
+				\draw[thick,-to] (-0.5,0) arc (180:{180-\dt}:0.5)
+					node[midway, left] {\small $\Delta \theta$};
+				\draw[thick,-to] (-1.5,0) --
+				 	node[right] {\small $\Delta \mathbf{x}$} ($(-1.5,0)!0.98!({180-\dt}:1.5)$);
+			\end{scope}
+		\end{tikzpicture}
+	\end{floatingfigure}
+
+	And the displacement of the center can be computed in terms of $\vec{a}$ and $\vec{b}$:
+	\[
+	\Delta \mathbf{x} = R_C (\cos(\Delta\theta)-1) \vec{a} + R_C\sin(\Delta\theta) \vec{b}.
+	\]
+	And we have the final equations for $\delta x$ and $\Delta y$:
+	\[
+	\boxed{\begin{split}
+		\Delta x &= R_C (\cos(\Delta\theta)-1) \cos(\alpha + \beta) - R_C \sin(\Delta\theta) \sin(\alpha+\beta),\\
+		\Delta y &= R_C (\cos(\Delta\theta)-1) \sin(\alpha + \beta) + R_C \sin(\Delta\theta) \cos(\alpha+\beta).
+	\end{split}}
+	\]
 
 
 \end{document}

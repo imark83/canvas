@@ -74,14 +74,6 @@ void Car::attachCaravan (int caravan_model) {
 	// caravan->setProgram (program);
 }
 
-// void Car::setScale (float sc) {
-// 	Object::setScale(sc);
-// 	interaxis_length *= sc;
-// }
-
-// void Car::initBuffers () {
-//
-// }
 void Car::render (Camera cam, float depth) const {
 	glBindVertexArray (getVao());
 	glBindBuffer (GL_ARRAY_BUFFER, getBuffer());

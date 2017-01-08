@@ -40,6 +40,16 @@ void Scene::init () {
 	spot.setProgram (car.getProgram());
 	spot.initBuffers (spot.p, "parking.jpg");
 	spot.setPosition (20,10);
+
+
+	ShaderInfo shaders2[] = {
+		{GL_VERTEX_SHADER, "floor.vs.glsl"},
+		{GL_FRAGMENT_SHADER, "floor.fs.glsl"},
+		{GL_NONE, NULL}};
+
+	ground.setProgram (loadShaders (shaders2));
+
+	ground.initBuffers (ground.p, "grass.jpg");
 }
 
 void Scene::render () {
@@ -51,6 +61,8 @@ void Scene::render () {
 
 	glUseProgram (spot.getProgram());
 	spot.render(cam, 0.99);
+	glUseProgram (ground.getProgram());
+	ground.render(cam, 0.99999);
 
 }
 

@@ -9,12 +9,14 @@ layout (location = 1) in vec2 vUV;
 
 
 
-uniform mat4 model;
+uniform vec2 size;
+uniform float depth;
 
 out vec2 UV;
 
 void main () {
-	gl_Position = model*vec4 (vPosition, 0.5, 1);
-	UV = vUV;
+	gl_Position = vec4 (vPosition, depth, 1);
+	UV.x = size.x * vUV.x;
+	UV.y = size.y * vUV.y;
 	// color = gl_Position+0.5;
 }

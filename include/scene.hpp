@@ -7,6 +7,7 @@
 #include <car.hpp>
 #include <spot.hpp>
 #include <camera.hpp>
+#include <ground.hpp>
 #include <vector>
 
 
@@ -18,8 +19,10 @@ public:
 	Car car;
 	Camera cam;
 	Spot spot;
+	Ground ground;
 
-	Scene () : car(), cam(canvasSize.x, canvasSize.y) {}
+	Scene () : car(), cam(canvasSize.x, canvasSize.y)
+	 		, ground () {}
 
 	void init ();
 

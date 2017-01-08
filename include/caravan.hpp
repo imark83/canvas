@@ -2,7 +2,6 @@
 #define __CARAVAN_HPP__
 
 #include <object.hpp>
-#include <camera.hpp>
 #include <math2d.hpp>
 
 class Caravan : public Object {

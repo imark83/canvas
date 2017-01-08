@@ -43,8 +43,8 @@ void Scene::init () {
 
 
 	ShaderInfo shaders2[] = {
-		{GL_VERTEX_SHADER, "floor.vs.glsl"},
-		{GL_FRAGMENT_SHADER, "floor.fs.glsl"},
+		{GL_VERTEX_SHADER, "ground.vs.glsl"},
+		{GL_FRAGMENT_SHADER, "ground.fs.glsl"},
 		{GL_NONE, NULL}};
 
 	ground.setProgram (loadShaders (shaders2));

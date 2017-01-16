@@ -2,14 +2,10 @@
 #define __CARAVAN_HPP__
 
 #include <object.hpp>
-#include <renderable.hpp>
-#include <camera.hpp>
 #include <math2d.hpp>
 
-class Caravan : public Object, public Renderable {
+class Caravan : public Object {
 public:
-	// DRAWING VARIABLES
-	Vector2f p[8];			// puntos
 
 
 	// DESIGN VARIABLES
@@ -23,10 +19,6 @@ public:
 
 	Caravan (int = 0);
 
-
-	// INHERITED METHODS
-	void initBuffers ();
-	void render (Camera) const;
 
 };
 

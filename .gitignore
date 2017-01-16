@@ -36,7 +36,7 @@ car2.jpg
 caravan.jpg
 caravan2.jpg
 
-# latex
-*.log
+#LATEX
 *.aux
+*.log
 car.pdf

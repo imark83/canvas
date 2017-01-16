@@ -4,14 +4,13 @@
 
 #include <math2d.hpp>
 #include <object.hpp>
-#include <renderable.hpp>
 
 #include <caravan.hpp>
 
 
 enum model_t {DEFAULT, ROVER};
 
-class Car : public Object, public Renderable {
+class Car : public Object {
 public:
 
 	// GEOMETRIA DEL COCHE
@@ -19,7 +18,6 @@ public:
 	float length;
 	float width;
 
-	Vector2f p[8];
 
 	// VARIABLES DE ESTADO DE CONTROL DE COCHE
 	float wheelPosition; // con respecto al eje del coche
@@ -68,7 +66,7 @@ public:
 	// ACTUALIZAR POSICION DE COCHE DE ACUERDO CON EL CONTROL
 	void motionStep (int millis);
 
-	void initBuffers ();
-	void render (Camera) const;
+	// void initBuffers ();
+	void render (Camera cam, float depth) const;
 };
 #endif
